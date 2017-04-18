@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "681821793276",
+    "firebase_url": "https://amweek-eae7f.firebaseio.com",
+    "project_id": "amweek-eae7f",
+    "storage_bucket": "amweek-eae7f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:681821793276:android:397d7f9a88e732ba",
+        "android_client_info": {
+          "package_name": "com.endava.androidamweek"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "681821793276-d9th04sn1ft29vn1ffa67bd9a628gf8j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2VqWwN6HD_GuGmLzYJCvPMQUdjm6LbD8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
