@@ -21,3 +21,11 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+ext {
+    supportLibraryVersion = '25.3.1'
+    constraintLayoutVersion = '1.0.2'
+    firebaseVersion = '10.0.1'
+    testCompileVersion = '4.12'
+
+}
