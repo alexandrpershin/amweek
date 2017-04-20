@@ -1,0 +1,27 @@
+<tabs>
+    <tab
+        barColorWhenSelected="#48545b"
+        icon="@drawable/ic_filter_4"
+        id="@+id/monday"
+        title="Monday" />
+    <tab
+        barColorWhenSelected="#e0e0e1"
+        icon="@drawable/ic_filter_4"
+        id="@+id/tuesday"
+        title="Tuesday" />
+    <tab
+        barColorWhenSelected="#f7f8f9"
+        icon="@drawable/ic_filter_4"
+        id="@+id/wednesday"
+        title="Wednesday" />
+    <tab
+        barColorWhenSelected="#e0e0e1"
+        icon="@drawable/ic_filter_4"
+        id="@+id/thursday"
+        title="Thursday" />
+    <tab
+        barColorWhenSelected="#48545b"
+        icon="@drawable/ic_filter_4"
+        id="@+id/friday"
+        title="Friday" />
+</tabs>
