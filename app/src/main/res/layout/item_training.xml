@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:folding-cell="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.ramotion.foldingcell.FoldingCell
+        android:id="@+id/foldingCell"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        folding-cell:additionalFlipsCount="2"
+        folding-cell:animationDuration="1000"
+        folding-cell:backSideColor="@color/colorGreyDark"
+        folding-cell:cameraHeight="30">
+
+        <!-- content -->
+        <include layout="@layout/item_content_layout" />
+
+        <!-- title -->
+        <include layout="@layout/item_title_layout" />
+
+
+    </com.ramotion.foldingcell.FoldingCell>
+
+    <!-- divider line -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_width"
+        android:layout_marginTop="@dimen/min_spacing"
+        android:src="@color/colorGreyLight" />
+
+</LinearLayout>
+
+

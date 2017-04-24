@@ -26,14 +26,18 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:' + rootProject.ext.supportLibraryVersion
     compile 'com.android.support.constraint:constraint-layout:' + rootProject.ext.constraintLayoutVersion
-    //Firebase
+    // Firebase
     compile 'com.google.firebase:firebase-database:' + rootProject.ext.firebaseVersion
     testCompile 'junit:junit:' + rootProject.ext.testCompileVersion
     // Bottom Bar
     compile 'com.android.support:design:' + rootProject.ext.supportLibraryVersion
     compile 'com.roughike:bottom-bar:' + rootProject.ext.bottombarVersion
-    //Butterknife
+    // Butterknife
     compile 'com.jakewharton:butterknife:' + rootProject.ext.butterknifeVersion
     annotationProcessor 'com.jakewharton:butterknife-compiler:' + rootProject.ext.butterknifeVersion
+    // Folding Cell
+    compile 'com.ramotion.foldingcell:folding-cell:' + rootProject.ext.foldingcellVersion
+    // Circle ImageView
+    compile 'de.hdodenhof:circleimageview:' + rootProject.ext.roundImageviewVersion
 }
 apply plugin: 'com.google.gms.google-services'

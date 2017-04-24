@@ -3,4 +3,7 @@
     <color name="colorPrimary">#DE411B</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#ffffff</color>
+    <color name="colorGreyDark">#48545b</color>
+    <color name="colorGreyLight">#e0e0e1</color>
+    <color name="colorGreyMedium">#E0E0E0</color>
 </resources>
