@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">AndroidAMWeek</string>
+    <string name="description">DESCRIPTION</string>
+    <string name="speaker">Speaker</string>
+    <string name="about_speaker">ABOUT SPEAKER</string>
+    <string name="trainings">TRAININGS</string>
+    <string name="toolbar_title_shedule">Schedule</string>
+    <string name="toolbar_title_speaker">Schedule</string>
 </resources>

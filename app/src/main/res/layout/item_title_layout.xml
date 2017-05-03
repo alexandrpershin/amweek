@@ -8,14 +8,14 @@
     <!-- left part -->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="3"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
         android:background="@color/colorAccent"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:padding="@dimen/min_spacing">
 
         <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/speakerImage"
+            android:id="@+id/foldSpeakerImage"
             android:layout_width="@dimen/image_size"
             android:layout_height="@dimen/image_size"
             android:layout_marginStart="@dimen/min_spacing"
@@ -25,7 +25,7 @@
 
     </RelativeLayout>
 
-    <!-- right part -->
+    <!-- content part -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -36,55 +36,55 @@
         android:paddingStart="@dimen/min_spacing">
 
         <TextView
-            android:id="@+id/trainingTitle"
+            android:id="@+id/stream"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="Dgfg fgfjgj fgrtbjjjjjjjjjjjjjjjjjjjnbn"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/subheading_text_size"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/shortDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/trainingTitle"
             android:layout_marginTop="@dimen/min_spacing"
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:maxLines="2"
-            android:text="Tututututututu  tutudud utututu fg gfg jhjh jhjh jhjh jhju dfg dgr"
+            android:text="AM Culture and Soft skills"
             android:textColor="@color/colorGreyDark"
             android:textSize="@dimen/body_text_size" />
+
+        <TextView
+            android:id="@+id/foldTrainingTitle"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:ellipsize="end"
+            android:layout_below="@+id/stream"
+            android:maxLines="3"
+            android:gravity="center_vertical"
+            android:text="What applications do when they gin a business ecosystem?"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/subheading_text_size"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_below="@+id/shortDescription"
+            android:layout_below="@+id/foldTrainingTitle"
             android:gravity="center"
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/timeIcon"
+                android:id="@+id/foldTimeIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/max_spacing"
                 android:adjustViewBounds="true"
                 android:src="@drawable/ic_clock" />
 
             <TextView
-                android:id="@+id/time"
+                android:id="@+id/foldTrainingTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/min_spacing"
-                android:text="14:54"
+                android:text="12:21"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/body_text_size" />
 
             <ImageView
-                android:id="@+id/speakerIcon"
+                android:id="@+id/foldSpeakerIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/max_spacing"
                 android:layout_marginStart="@dimen/medium_spacing"
@@ -92,16 +92,36 @@
                 android:src="@drawable/ic_microphone" />
 
             <TextView
-                android:id="@+id/speaker"
+                android:id="@+id/foldTrainingSpeaker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/min_spacing"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="Mafdf Ffhhy1"
+                android:text="Orlando Alexandrescu"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/body_text_size" />
+
         </LinearLayout>
+
+    </RelativeLayout>
+
+    <!-- right part -->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@color/colorAccent"
+        android:clickable="true"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/min_spacing">
+
+        <ImageView
+            android:id="@+id/star"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/max_spacing"
+            android:layout_centerVertical="true"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_clock" />
 
     </RelativeLayout>
 

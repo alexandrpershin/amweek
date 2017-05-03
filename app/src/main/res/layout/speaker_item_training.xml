@@ -15,26 +15,24 @@
         android:paddingStart="0dp">
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/speakerTrainingTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Dgfg fgfjgj fgrtbjjjjjjjjjjjjjjjjjjjnbn"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/subheading_text_size"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/shortDescription"
+            android:id="@+id/speakerTrainingShortDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/title"
+            android:layout_below="@+id/speakerTrainingTitle"
             android:layout_marginTop="@dimen/min_spacing"
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:maxLines="1"
-            android:text="Tututututututu  tutudud utututu fg gfgdfg dgr"
             android:textColor="@color/colorGreyDark"
             android:textSize="@dimen/body_text_size" />
 
@@ -43,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_below="@+id/shortDescription"
+            android:layout_below="@+id/speakerTrainingShortDescription"
             android:layout_marginTop="@dimen/min_spacing"
             android:gravity="center"
             android:orientation="horizontal">
@@ -56,7 +54,7 @@
                 android:src="@drawable/ic_clock" />
 
             <TextView
-                android:id="@+id/time"
+                android:id="@+id/speakerTrainingTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -74,7 +72,7 @@
                 android:src="@drawable/ic_date" />
 
             <TextView
-                android:id="@+id/date"
+                android:id="@+id/speakerTrainingDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

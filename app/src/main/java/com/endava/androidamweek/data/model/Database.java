@@ -1,4 +1,6 @@
-package com.endava.androidamweek.Model;
+package com.endava.androidamweek.data.model;
+
+import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -12,7 +14,8 @@ import java.util.Map;
 
 public class Database {
 
-    private static Database database;
+    private static Database database ;
+
     private DatabaseReference databaseReference;
     private DatabaseReference quizzesReferece;
     private DatabaseReference usersReferece;
@@ -23,6 +26,9 @@ public class Database {
     private ArrayList<Speaker> speakers;
     private ArrayList<User> users;
     private ArrayList<Quizz> quizzes;
+
+    private static Boolean connected;
+    private static DatabaseReference connectedRef;
 
 
     private Database() {
@@ -36,9 +42,32 @@ public class Database {
     }
 
     public static Database getInstance() {
-        database = new Database();
+        if(database==null)
+            database  = new Database();
 
         return database;
+    }
+
+    public static   void checkInternetConnectionState(){
+       connectedRef = FirebaseDatabase.getInstance().getReference(".info/connected");
+
+        connectedRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                connected = snapshot.getValue(Boolean.class);
+                if(connected==false)
+                    Log.i("Connection","disconnect");
+                else Log.i("Connection","connect");
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                System.err.println("Listener was cancelled");
+            }
+        });
+
+
     }
 
     private void getDataFromFirebase() {
@@ -46,10 +75,9 @@ public class Database {
         getSpeakersFromFirebase();
         getUsersFromFirebase();
         getQuizzesFromFirebase();
-
     }
 
-    private void getTrainingsFromFirebase() {
+    public void getTrainingsFromFirebase() {
         getTrainingsReferece().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -59,6 +87,7 @@ public class Database {
                     map.put(data.getKey(), training);
                 }
                 trainings = new ArrayList<>(map.values());
+                
             }
 
             @Override
@@ -68,23 +97,16 @@ public class Database {
         });
     }
 
-    private void getSpeakersFromFirebase() {
+
+    public void getSpeakersFromFirebase() {
         getSpeakersReferece().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Map<String, Speaker> map = new HashMap< >();
-                ArrayList<SpeakerTrainings> trainingslist = new ArrayList<>();
 
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     Speaker speaker = data.getValue(Speaker.class);
-
-                    for (DataSnapshot dataTrainings : data.child("trainings").getChildren()) {
-                        SpeakerTrainings speakerTrainings = dataTrainings.getValue(SpeakerTrainings.class);
-                        trainingslist.add(speakerTrainings);
-                    }
-                    speaker.setTraining(trainingslist);
                     map.put(data.getKey(), speaker);
-                    trainingslist = new ArrayList<>();
                 }
                 speakers = new ArrayList<>(map.values());
             }
@@ -102,13 +124,13 @@ public class Database {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Map<String, User> map = new HashMap< >();
-                ArrayList<SpeakerTrainings> trainingslist = new ArrayList<>();
+                ArrayList<UserTraining> trainingslist = new ArrayList<>();
 
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     User user = data.getValue(User.class);
 
                     for (DataSnapshot dataTrainings : data.child("trainings").getChildren()) {
-                        SpeakerTrainings speakerTrainings = dataTrainings.getValue(SpeakerTrainings.class);
+                        UserTraining speakerTrainings = dataTrainings.getValue(UserTraining.class);
                         trainingslist.add(speakerTrainings);
                     }
                     user.setTraining(trainingslist);
@@ -189,4 +211,5 @@ public class Database {
     public ArrayList<Quizz> getQuizzes() {
         return quizzes;
     }
+
 }

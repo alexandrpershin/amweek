@@ -1,0 +1,132 @@
+package com.endava.androidamweek.ui.main;
+
+import android.animation.Animator;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.support.annotation.IdRes;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.view.ViewAnimationUtils;
+
+import com.endava.androidamweek.R;
+import com.endava.androidamweek.data.model.Database;
+import com.endava.androidamweek.data.model.Quizz;
+import com.endava.androidamweek.ui.training.TrainingsFragment;
+import com.endava.androidamweek.utils.Utils;
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabSelectListener;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class ScheduleActivity extends BaseActivity implements OnTabSelectListener {
+
+    @BindView(R.id.bottomBar)
+    BottomBar bottomBar;
+
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
+    @BindView(R.id.floatingActionButton)
+    FloatingActionButton floatingActionButton;
+
+    @BindView(R.id.mainContent)
+    CoordinatorLayout view;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        ScreenManager.getInstance().setContext(this);
+
+        ButterKnife.bind(this);
+        toolbar.setTitle(R.string.toolbar_title_shedule);
+
+        bottomBar.setOnTabSelectListener(this);
+        setSupportActionBar(toolbar);
+
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                doCircularReveal();
+                for (Quizz quizz : Database.getInstance().getQuizzes()) {
+                    System.out.println(quizz.getDate() + " " + quizz.getQuestion() + " " + quizz.getStream() + " " + quizz.getTitle());
+                }
+
+            }
+        });
+
+        setCurrentDay();
+
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_schedule;
+    }
+
+    private void setCurrentDay() {
+        switch (Utils.getWeekDay()) {
+            case 1:
+                bottomBar.setDefaultTab(R.id.monday);
+                break;
+            case 2:
+                bottomBar.setDefaultTab(R.id.tuesday);
+                break;
+            case 3:
+                bottomBar.setDefaultTab(R.id.wednesday);
+                break;
+            case 4:
+                bottomBar.setDefaultTab(R.id.thursday);
+                break;
+            case 5:
+                bottomBar.setDefaultTab(R.id.friday);
+                break;
+        }
+    }
+
+    private void doCircularReveal() {
+        int centerX = view.getWidth() / 2;
+        int centerY = view.getHeight() / 2;
+
+        int startRadius = 0;
+        int endRadius = Math.max(centerX, centerY);
+
+        Animator anim = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            anim = ViewAnimationUtils.createCircularReveal(view, centerX, centerY, startRadius, endRadius);
+        }
+
+        view.setBackgroundColor(Color.LTGRAY);
+        anim.start();
+    }
+
+
+    @Override
+    public void onTabSelected(@IdRes int tabId) {
+        switch (tabId) {
+            case R.id.monday:
+                ScreenManager.getInstance().replaceFragment(new TrainingsFragment(), 1);
+                break;
+            case R.id.tuesday:
+                ScreenManager.getInstance().replaceFragment(new TrainingsFragment(), 2);
+                break;
+            case R.id.wednesday:
+                ScreenManager.getInstance().replaceFragment(new TrainingsFragment(), 3);
+                break;
+            case R.id.thursday:
+                ScreenManager.getInstance().replaceFragment(new TrainingsFragment(), 4);
+                break;
+            case R.id.friday:
+                ScreenManager.getInstance().replaceFragment(new TrainingsFragment(), 5);
+                break;
+            default:
+                break;
+        }
+    }
+
+}

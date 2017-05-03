@@ -1,18 +1,16 @@
-package com.endava.androidamweek.Model;
+package com.endava.androidamweek.data.model;
 
 import java.util.ArrayList;
 
-/**
- * Created by Алекс on 21.04.2017.
- */
 
 public class Quizz {
     private String date;
     private String question;
     private String time;
-     private Integer questionId;
+    private String title;
+    private String stream;
+    private Boolean quizzStatus;
     private ArrayList<Answer> answer;
-
 
     public String getDate() {
         return date;
@@ -38,12 +36,28 @@ public class Quizz {
         this.time = time;
     }
 
-    public Integer getQuestionId() {
-        return questionId;
+    public String getTitle() {
+        return title;
     }
 
-    public void setQuestionId(Integer questionId) {
-        this.questionId = questionId;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getStream() {
+        return stream;
+    }
+
+    public void setStream(String stream) {
+        this.stream = stream;
+    }
+
+    public Boolean getQuizzStatus() {
+        return quizzStatus;
+    }
+
+    public void setQuizzStatus(Boolean quizzStatus) {
+        this.quizzStatus = quizzStatus;
     }
 
     public ArrayList<Answer> getAnswer() {
