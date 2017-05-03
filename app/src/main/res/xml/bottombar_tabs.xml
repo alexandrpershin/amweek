@@ -1,27 +1,37 @@
 <tabs>
     <tab
-        barColorWhenSelected="#48545b"
-        icon="@drawable/ic_filter_4"
+        activeColor="#ffffff"
+        inActiveColor="#ffffff"
+        barColorWhenSelected="#000000"
+        icon="@drawable/ic_monday"
         id="@+id/monday"
         title="Monday" />
     <tab
-        barColorWhenSelected="#e0e0e1"
-        icon="@drawable/ic_filter_4"
+        activeColor="#ffffff"
+        inActiveColor="#ffffff"
+        barColorWhenSelected="#30383e"
+        icon="@drawable/ic_tuesday"
         id="@+id/tuesday"
         title="Tuesday" />
     <tab
-        barColorWhenSelected="#f7f8f9"
-        icon="@drawable/ic_filter_4"
+        activeColor="#ffffff"
+        inActiveColor="#ffffff"
+        barColorWhenSelected="#e0e0e1"
+        icon="@drawable/ic_wednesday"
         id="@+id/wednesday"
         title="Wednesday" />
     <tab
-        barColorWhenSelected="#e0e0e1"
-        icon="@drawable/ic_filter_4"
+        activeColor="#ffffff"
+        inActiveColor="#ffffff"
+        barColorWhenSelected="#30383e"
+        icon="@drawable/ic_thursday"
         id="@+id/thursday"
         title="Thursday" />
     <tab
-        barColorWhenSelected="#48545b"
-        icon="@drawable/ic_filter_4"
+        activeColor="#ffffff"
+        inActiveColor="#ffffff"
+        barColorWhenSelected="#000000"
+        icon="@drawable/ic_friday"
         id="@+id/friday"
         title="Friday" />
 </tabs>

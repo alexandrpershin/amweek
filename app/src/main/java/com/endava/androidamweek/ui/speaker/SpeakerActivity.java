@@ -20,10 +20,10 @@ import butterknife.ButterKnife;
 
 public class SpeakerActivity extends BaseActivity  {
 
-    @BindView(R.id.speakerName)
+    @BindView(R.id.speaker_name)
     TextView speakerName;
 
-    @BindView(R.id.speakerShortInfo)
+    @BindView(R.id.speaker_short_info)
     TextView speakerShortInfo;
 
     @BindView(R.id.speakerDescription)

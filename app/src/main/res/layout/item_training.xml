@@ -4,6 +4,7 @@
     xmlns:folding-cell="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/color_accent"
     android:orientation="vertical">
 
     <com.ramotion.foldingcell.FoldingCell
@@ -17,10 +18,10 @@
         folding-cell:cameraHeight="30">
 
         <!-- content -->
-        <include layout="@layout/item_content_layout" />
+        <include layout="@layout/item_training_content" />
 
         <!-- title -->
-        <include layout="@layout/item_title_layout" />
+        <include layout="@layout/item_training_title" />
 
 
     </com.ramotion.foldingcell.FoldingCell>

@@ -2,6 +2,7 @@ package com.endava.androidamweek.data.model;
 
 
 public class Answer {
+
     private String answer;
     private String time;
     private String date;

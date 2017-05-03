@@ -1,18 +1,15 @@
 package com.endava.androidamweek.ui.main;
 
-import android.animation.Animator;
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.ViewAnimationUtils;
 
 import com.endava.androidamweek.R;
-import com.endava.androidamweek.data.model.Database;
-import com.endava.androidamweek.data.model.Quizz;
+import com.endava.androidamweek.ui.quizz.QuizzActivity;
 import com.endava.androidamweek.ui.training.TrainingsFragment;
 import com.endava.androidamweek.utils.Utils;
 import com.roughike.bottombar.BottomBar;
@@ -52,11 +49,7 @@ public class ScheduleActivity extends BaseActivity implements OnTabSelectListene
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                doCircularReveal();
-                for (Quizz quizz : Database.getInstance().getQuizzes()) {
-                    System.out.println(quizz.getDate() + " " + quizz.getQuestion() + " " + quizz.getStream() + " " + quizz.getTitle());
-                }
-
+                startActivity(new Intent(ScheduleActivity.this, QuizzActivity.class));
             }
         });
 
@@ -89,23 +82,6 @@ public class ScheduleActivity extends BaseActivity implements OnTabSelectListene
         }
     }
 
-    private void doCircularReveal() {
-        int centerX = view.getWidth() / 2;
-        int centerY = view.getHeight() / 2;
-
-        int startRadius = 0;
-        int endRadius = Math.max(centerX, centerY);
-
-        Animator anim = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            anim = ViewAnimationUtils.createCircularReveal(view, centerX, centerY, startRadius, endRadius);
-        }
-
-        view.setBackgroundColor(Color.LTGRAY);
-        anim.start();
-    }
-
-
     @Override
     public void onTabSelected(@IdRes int tabId) {
         switch (tabId) {
@@ -128,5 +104,4 @@ public class ScheduleActivity extends BaseActivity implements OnTabSelectListene
                 break;
         }
     }
-
 }

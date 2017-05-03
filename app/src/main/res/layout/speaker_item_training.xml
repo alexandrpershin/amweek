@@ -2,59 +2,64 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/color_accent"
     android:baselineAligned="false"
     android:orientation="horizontal">
 
-    <!-- RIGHT PART -->
     <RelativeLayout
         android:layout_width="0dp"
-        android:layout_height="@dimen/image_size"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/max_spacing"
         android:layout_weight="1"
-        android:background="@color/colorAccent"
-        android:padding="@dimen/medium_spacing"
-        android:paddingStart="0dp">
+        android:background="@color/color_accent">
 
         <TextView
-            android:id="@+id/speakerTrainingTitle"
+            android:id="@+id/speaker_training_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
+            android:text="AM Week dgkjfk fgkjfk gfkgjfk gfkgj"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/subheading_text_size"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/speakerTrainingShortDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/speakerTrainingTitle"
-            android:layout_marginTop="@dimen/min_spacing"
-            android:ellipsize="end"
-            android:gravity="center_vertical"
-            android:maxLines="1"
-            android:textColor="@color/colorGreyDark"
-            android:textSize="@dimen/body_text_size" />
-
         <LinearLayout
-            android:id="@+id/dateInfo"
+            android:id="@+id/date_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_below="@+id/speakerTrainingShortDescription"
+            android:layout_below="@+id/speaker_training_title"
             android:layout_marginTop="@dimen/min_spacing"
             android:gravity="center"
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/timeIcon"
+                android:id="@+id/stream_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/max_spacing"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_stream" />
+
+            <TextView
+                android:id="@+id/speaker_training_short_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/min_spacing"
+                android:text="Stream"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/body_text_size" />
+
+            <ImageView
+                android:id="@+id/time_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/max_spacing"
+                android:layout_marginStart="@dimen/medium_spacing"
                 android:adjustViewBounds="true"
                 android:src="@drawable/ic_clock" />
 
             <TextView
-                android:id="@+id/speakerTrainingTime"
+                android:id="@+id/speaker_training_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -64,7 +69,7 @@
                 android:textSize="@dimen/body_text_size" />
 
             <ImageView
-                android:id="@+id/dateIcon"
+                android:id="@+id/date_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/max_spacing"
                 android:layout_marginStart="@dimen/medium_spacing"
@@ -72,7 +77,7 @@
                 android:src="@drawable/ic_date" />
 
             <TextView
-                android:id="@+id/speakerTrainingDate"
+                android:id="@+id/speaker_training_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -88,10 +93,10 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="@dimen/line_width"
-            android:layout_below="@+id/dateInfo"
-            android:layout_marginTop="@dimen/min_spacing"
-            android:layout_weight="1"
-            android:src="@color/colorGreyLight" />
+            android:layout_below="@+id/date_info"
+            android:layout_marginTop="@dimen/max_spacing"
+            android:src="@color/colorGreyMedium"
+            android:visibility="visible" />
 
     </RelativeLayout>
 

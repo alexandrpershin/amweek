@@ -2,6 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:background="@color/color_accent"
     android:textColor="@android:color/white"
     android:visibility="gone">
 
@@ -10,7 +11,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorGreyDark"
+        android:background="@color/color_grey_dark"
         android:paddingBottom="@dimen/min_spacing"
         android:paddingLeft="@dimen/medium_spacing"
         android:paddingRight="@dimen/medium_spacing"
@@ -21,9 +22,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:padding="@dimen/min_spacing"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/title_text_size"
-            android:textStyle="bold" />
+            android:textSize="@dimen/subheading_text_size" />
 
     </RelativeLayout>
 
@@ -67,7 +68,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/medium_spacing"
                         android:text="March 5, 2017"
-                        android:textColor="@color/colorGreyDark"
+                        android:textColor="@color/color_grey_dark"
                         android:textSize="@dimen/subheading_text_size" />
                 </LinearLayout>
 
@@ -98,7 +99,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/medium_spacing"
                         android:text="20:12 (Duration: 45)"
-                        android:textColor="@color/colorGreyDark"
+                        android:textColor="@color/color_grey_dark"
                         android:textSize="@dimen/subheading_text_size" />
                 </LinearLayout>
             </RelativeLayout>
@@ -135,8 +136,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="@dimen/medium_spacing"
-                        android:text="Drr rtr sdfgr"
-                        android:textColor="@color/colorGreyDark"
+                        android:text="NBC"
+                        android:textColor="@color/color_grey_dark"
                         android:textSize="@dimen/subheading_text_size" />
 
                 </LinearLayout>
@@ -157,7 +158,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/ic_location" />
+                        android:src="@drawable/ic_stream" />
 
                     <TextView
                         android:id="@+id/streamTitle"
@@ -165,12 +166,77 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="@dimen/medium_spacing"
-                        android:text="AM Culture Soft "
-                        android:textColor="@color/colorGreyDark"
+                        android:textColor="@color/color_grey_dark"
                         android:textSize="@dimen/subheading_text_size" />
 
                 </LinearLayout>
             </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/min_spacing"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:id="@+id/unfoldLanguageIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_language" />
+
+                    <TextView
+                        android:id="@+id/unfoldLanguage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/medium_spacing"
+                        android:textColor="@color/color_grey_dark"
+                        android:textSize="@dimen/subheading_text_size" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:id="@+id/typeLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:id="@+id/unfoldTypeIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_type" />
+
+                    <TextView
+                        android:id="@+id/unfoldType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/medium_spacing"
+                        android:textColor="@color/color_grey_dark"
+                        android:textSize="@dimen/subheading_text_size" />
+                </LinearLayout>
+            </RelativeLayout>
+
         </LinearLayout>
 
         <TextView
@@ -187,11 +253,12 @@
             android:layout_height="@dimen/line_width"
             android:layout_marginBottom="@dimen/min_spacing"
             android:layout_marginTop="@dimen/min_spacing"
-            android:src="@color/colorGreyDark" />
+            android:src="@color/color_grey_dark" />
 
         <!-- description part -->
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/medium_spacing"
             android:layout_height="wrap_content"
             android:baselineAligned="false"
             android:orientation="horizontal">
@@ -200,8 +267,9 @@
                 android:id="@+id/unfoldTrainingDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorGreyDark"
+                android:textColor="@color/color_grey_dark"
                 android:textSize="@dimen/subheading_text_size" />
+
         </LinearLayout>
 
         <TextView
@@ -219,7 +287,7 @@
             android:layout_height="@dimen/line_width"
             android:layout_marginBottom="@dimen/min_spacing"
             android:layout_marginTop="@dimen/min_spacing"
-            android:src="@color/colorGreyDark" />
+            android:src="@color/color_grey_dark" />
 
         <!-- speaker part -->
 
@@ -255,18 +323,17 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/medium_spacing"
-                android:layout_marginRight="@dimen/medium_spacing"
+                android:layout_marginLeft="@dimen/max_spacing"
                 android:layout_weight="1">
 
                 <TextView
                     android:id="@+id/unfoldSpeakerName"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:maxLines="2"
-                    android:textColor="@color/colorGreyDark"
+                    android:layout_gravity="center"
+                    android:maxLines="1"
+                    android:textColor="@color/color_grey_dark"
                     android:textSize="@dimen/subheading_text_size" />
 
                 <ImageView

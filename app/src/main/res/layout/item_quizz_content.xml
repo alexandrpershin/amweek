@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainContent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/max_spacing"
+    android:visibility="visible">
+
+    <TextView
+        android:id="@+id/question_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text="What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
+        android:textSize="@dimen/subheading_text_size" />
+
+    <io.github.kbiakov.codeview.CodeView
+        android:id="@+id/codeview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/answer_box"
+        android:layout_below="@+id/question_box"
+        android:layout_marginBottom="@dimen/medium_spacing"
+        android:visibility="visible"
+        android:layout_marginTop="@dimen/medium_spacing"
+        android:isScrollContainer="true">
+
+    </io.github.kbiakov.codeview.CodeView>
+
+
+    <EditText
+        android:id="@+id/answer_box"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:layout_above="@+id/btn_submit"
+        android:layout_marginBottom="@dimen/medium_spacing"
+        android:background="@color/colorGreyMedium"
+        android:hint="@string/quizz_answer_hint"
+        android:padding="14dp"
+        android:scrollbars="vertical" />
+
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/btn_submit"
+        android:textColor="@color/color_accent"
+        android:background="@color/colorPrimary"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:foregroundTint="@color/code_content_background"
+        android:textSize="@dimen/subheading_text_size" />
+
+
+</RelativeLayout>
+
+

@@ -124,9 +124,8 @@ class TrainingsAdapter extends RecyclerView.Adapter<TrainingsAdapter.ViewHolder>
         holder.unfoldDate.setText(item.getDate());
         holder.unfoldTrainingLocation.setText(item.getLocation());
         holder.unfoldTrainingTime.setText(item.getTimeStart());
-//        holder.unfoldTrainingDescription.setText(item.getLongInfo());
+        holder.unfoldTrainingDescription.setText(item.getDescription());
         holder.unfoldSpeakerName.setText(utils.getSpeakerName(speakers, item.getSpeakerId()));
-        holder.unfoldSpeakerName.setText(utils.getSpeakerName(speakers,item.getSpeakerId()));
 
         holder.speakerLayout.setOnClickListener(new View.OnClickListener() {
             @Override

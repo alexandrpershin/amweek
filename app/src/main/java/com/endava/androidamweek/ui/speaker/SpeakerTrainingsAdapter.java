@@ -26,16 +26,16 @@ class SpeakerTrainingsAdapter extends RecyclerView.Adapter<SpeakerTrainingsAdapt
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.speakerTrainingTitle)
+        @BindView(R.id.speaker_training_title)
         TextView speakerTrainingTitle;
 
-        @BindView(R.id.speakerTrainingShortDescription)
+        @BindView(R.id.speaker_training_short_description)
         TextView speakerTrainingShortDescription;
 
-        @BindView(R.id.speakerTrainingTime)
+        @BindView(R.id.speaker_training_time)
         TextView speakerTrainingTime;
 
-        @BindView(R.id.speakerTrainingDate)
+        @BindView(R.id.speaker_training_date)
         TextView speakerTrainingDate;
 
         ViewHolder(View v) {

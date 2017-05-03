@@ -1,14 +1,12 @@
 package com.endava.androidamweek.data.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class User {
     private String email;
     private String firstName;
     private String lastName;
-    private Integer id;
+    private String id;
     private ArrayList<UserTraining> training;
 
     public String getEmail() {
@@ -35,11 +33,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

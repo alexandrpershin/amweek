@@ -2,15 +2,24 @@ package com.endava.androidamweek.data.model;
 
 import java.util.ArrayList;
 
-
 public class Quizz {
     private String date;
     private String question;
     private String time;
     private String title;
     private String stream;
+//    private String codeSnippet;
     private Boolean quizzStatus;
     private ArrayList<Answer> answer;
+
+//    public void setCodeSnippet(String codeSnippet) {
+//        this.codeSnippet = codeSnippet;
+//    }
+//
+//    public String getCodeSnippet() {
+//
+//        return codeSnippet;
+//    }
 
     public String getDate() {
         return date;

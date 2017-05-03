@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +56,7 @@ public class TrainingsFragment extends Fragment implements TrainingCallback, Spe
 
         recyclerView.setAdapter(adapter);
 
+
         return view;
     }
 
@@ -63,6 +65,7 @@ public class TrainingsFragment extends Fragment implements TrainingCallback, Spe
         Bundle bundle = getArguments();
         int dayOfWeek = bundle.getInt(DAY_OF_WEEK);
         adapter.updateList(trainings, speakers, dayOfWeek);
+        Log.i("ELEA",dayOfWeek+"");
     }
 
     @Override
