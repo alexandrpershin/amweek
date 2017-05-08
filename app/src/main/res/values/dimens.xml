@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <dimen name="title_text_size">20sp</dimen>
     <dimen name="body_text_size">14sp</dimen>
     <dimen name="subheading_text_size">16sp</dimen>
     <dimen name="max_spacing">15dp</dimen>
+    <dimen name="profile_image_spacing">30dp</dimen>
     <dimen name="medium_spacing">10dp</dimen>
     <dimen name="min_spacing">5dp</dimen>
     <dimen name="line_width">1dp</dimen>
     <dimen name="image_size">90dp</dimen>
+
+    <dimen name="line_text_size" tools:override="true">15sp</dimen>
+    <dimen name="line_height" tools:override="true">27dp</dimen>-->
+    <dimen name="line_num_width" tools:override="true">35dp</dimen>-->
+
 </resources>

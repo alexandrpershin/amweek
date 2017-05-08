@@ -1,3 +1,47 @@
 <resources>
     <string name="app_name">AndroidAMWeek</string>
+    <string name="description">DESCRIPTION</string>
+    <string name="speaker">Speaker</string>
+    <string name="about_speaker">ABOUT SPEAKER</string>
+    <string name="trainings">TRAININGS</string>
+    <string name="toolbar_title_shedule">Schedule</string>
+    <string name="toolbar_title_speaker">Speaker</string>
+    <string name="toolbar_title_quizz_data">Quizz</string>
+    <string name="toolbar_title_quizzes">Quizzes</string>
+    <string name="singl">  package io.github.kbiakov.codeviewexample;\n
+        \n
+        import android.os.Bundle;\n
+        import android.support.annotation.Nullable;\n
+        import android.support.v4.content.ContextCompat;\n
+        import android.support.v7.app.AppCompatActivity;\n
+        \n
+        import io.github.kbiakov.codeview.CodeView;\n
+        import io.github.kbiakov.codeview.highlight.ColorTheme;\n
+        \n
+        public class ListingsActivity extends AppCompatActivity {\n
+            \n
+            @Override\n
+            protected void onCreate(@Nullable Bundle savedInstanceState) {\n
+                super.onCreate(savedInstanceState);\n
+                setContentView(R.layout.activity_listings);\n
+                \n
+                int myColor = ContextCompat.getColor(this, R.color.code_content_background);\n
+                \n
+                CodeView codeView = (CodeView) findViewById(R.id.code_view);\n
+                \n
+                // use chaining to build view\n
+                codeView.highlightCode(\"js\")\n
+                        .setColorTheme(ColorTheme.SOLARIZED_LIGHT.withBgContent(myColor))\n
+                        .setCodeContent(getString(R.string.listing_js));\n
+                \n
+                // do not use chaining for built view\n
+                // (you can, but follow it should be performed sequentially)\n
+                codeView.setCodeContent(getString(R.string.listing_java));\n
+                codeView.highlightCode("java");\n
+            }\n
+        }</string>
+    <string name="quizz_answer_hint">Enter your answer here</string>
+    <string name="btn_submit">Submit</string>
+    <string name="str_winner">The winner is</string>
+>>>>>>> b733483f651a036a03afbb13daea2fbf2fd674f4
 </resources>

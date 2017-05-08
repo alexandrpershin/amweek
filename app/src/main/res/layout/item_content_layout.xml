@@ -6,6 +6,7 @@
     android:visibility="gone">
 
     <!-- content header line -->
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,7 +17,7 @@
         android:paddingTop="@dimen/min_spacing">
 
         <TextView
-            android:id="@+id/meetingTitle"
+            android:id="@+id/unfoldTrainingTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -27,98 +28,157 @@
     </RelativeLayout>
 
     <!-- content body layout -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorGreyMedium"
+        android:background="@color/colorGreyLight"
         android:orientation="vertical"
         android:padding="@dimen/medium_spacing">
 
         <!-- main info part -->
-        <RelativeLayout
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/medium_spacing">
+            android:baselineAligned="false"
+            android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="center">
+                android:layout_weight="1">
 
-                <ImageView
-                    android:id="@+id/dateIcon"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_date" />
+                    android:gravity="center_vertical">
 
-                <TextView
-                    android:id="@+id/date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/medium_spacing"
-                    android:text="March 5, 2017"
-                    android:textColor="@color/colorGreyDark"
-                    android:textSize="@dimen/subheading_text_size" />
-            </LinearLayout>
+                    <ImageView
+                        android:id="@+id/unfoldDateIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_date" />
 
-            <LinearLayout
-                android:id="@+id/timeLayout"
-                android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/unfoldDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/medium_spacing"
+                        android:text="March 5, 2017"
+                        android:textColor="@color/colorGreyDark"
+                        android:textSize="@dimen/subheading_text_size" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:gravity="center">
+                android:layout_weight="1">
 
-                <ImageView
-                    android:id="@+id/timeIcon"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/timeLayout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_clock" />
+                    android:layout_alignParentStart="true"
+                    android:gravity="center_vertical">
 
-                <TextView
-                    android:id="@+id/time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/medium_spacing"
-                    android:text="15:55 - 16:58"
-                    android:textColor="@color/colorGreyDark"
-                    android:textSize="@dimen/subheading_text_size" />
-            </LinearLayout>
+                    <ImageView
+                        android:id="@+id/unfoldTimeIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_clock" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/unfoldTrainingTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/medium_spacing"
+                        android:text="20:12 (Duration: 45)"
+                        android:textColor="@color/colorGreyDark"
+                        android:textSize="@dimen/subheading_text_size" />
+                </LinearLayout>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/min_spacing"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/timeLayout"
-                android:layout_marginTop="@dimen/min_spacing">
+                android:layout_weight="1">
 
-                <ImageView
-                    android:id="@+id/locationIcon"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_location" />
+                    android:gravity="center_vertical">
 
-                <TextView
-                    android:id="@+id/location"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="@dimen/medium_spacing"
-                    android:text="Moldova Meeting Room, 4th Floor"
-                    android:textColor="@color/colorGreyDark"
-                    android:textSize="@dimen/subheading_text_size" />
+                    <ImageView
+                        android:id="@+id/unfoldLocationIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_location" />
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/unfoldTrainingLocation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/medium_spacing"
+                        android:text="Drr rtr sdfgr"
+                        android:textColor="@color/colorGreyDark"
+                        android:textSize="@dimen/subheading_text_size" />
 
-        </RelativeLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/streamIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_location" />
+
+                    <TextView
+                        android:id="@+id/streamTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/medium_spacing"
+                        android:text="AM Culture Soft "
+                        android:textColor="@color/colorGreyDark"
+                        android:textSize="@dimen/subheading_text_size" />
+
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/max_spacing"
             android:fontFamily="sans-serif-condensed"
-            android:text="DESCRIPTION"
+            android:text="@string/description"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold" />
 
@@ -137,10 +197,9 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/description"
+                android:id="@+id/unfoldTrainingDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="fgf fshfdh jhew ehw hrkwh trwkh jwehk jewh j wehrewhrjewhwehjrg jrewhg jrgtjwh grjehgr hegwhrgeh wgrewhgrhwerh wegrjhegrj hegrjhe grhgejhgjhgr ygyg ghjghgh hg yt  j j j h g gf t tr "
                 android:textColor="@color/colorGreyDark"
                 android:textSize="@dimen/subheading_text_size" />
         </LinearLayout>
@@ -150,7 +209,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/max_spacing"
             android:fontFamily="sans-serif-condensed"
-            android:text="Speaker"
+            android:text="@string/speaker"
             android:textAllCaps="true"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold" />
@@ -163,13 +222,16 @@
             android:src="@color/colorGreyDark" />
 
         <!-- speaker part -->
+
         <LinearLayout
+            android:id="@+id/speakerLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
             android:orientation="horizontal">
 
             <!-- left part -->
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -178,7 +240,7 @@
                 android:orientation="vertical">
 
                 <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/speakerPhoto"
+                    android:id="@+id/unfoldSpeakerPhoto"
                     android:layout_width="@dimen/image_size"
                     android:layout_height="@dimen/image_size"
                     android:layout_marginStart="@dimen/min_spacing"
@@ -189,6 +251,7 @@
             </RelativeLayout>
 
             <!-- right part -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -197,18 +260,16 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:id="@+id/speakerName"
+                    android:id="@+id/unfoldSpeakerName"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:maxLines="2"
-                    android:text="Dgfg fgfjgj fgr  bjjjjhggg jjhjjhjhjhjhjhgggggjnbn"
                     android:textColor="@color/colorGreyDark"
                     android:textSize="@dimen/subheading_text_size" />
 
                 <ImageView
-                    android:id="@+id/arrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"

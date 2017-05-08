@@ -39,5 +39,16 @@ dependencies {
     compile 'com.ramotion.foldingcell:folding-cell:' + rootProject.ext.foldingcellVersion
     // Circle ImageView
     compile 'de.hdodenhof:circleimageview:' + rootProject.ext.roundImageviewVersion
+
+    compile 'com.google.firebase:firebase-auth:10.0.1'
+
+    compile 'com.google.android.gms:play-services-auth:10.0.1'
+
+    compile 'com.firebaseui:firebase-ui-storage:0.6.0'
+
+    compile 'com.squareup.picasso:picasso:2.5.2'
+
+    // CodeView
+    compile 'com.github.softwee:codeview-android:' + rootProject.ext.codeView
 }
 apply plugin: 'com.google.gms.google-services'
