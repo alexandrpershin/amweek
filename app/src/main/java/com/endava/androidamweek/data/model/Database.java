@@ -161,7 +161,7 @@ public class Database {
                         Answer answer = dataTrainings.getValue(Answer.class);
                         answerslist.add(answer);
                     }
-                    quizz.setAnswer(answerslist);
+                    quizz.setUserAnswers(answerslist);
                     map.put(data.getKey(), quizz);
                     answerslist = new ArrayList<Answer>();
                 }
@@ -183,7 +183,7 @@ public class Database {
         return quizzesReferece;
     }
 
-    private DatabaseReference getUsersReferece() {
+    public DatabaseReference getUsersReferece() {
         return usersReferece;
     }
 

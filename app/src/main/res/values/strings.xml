@@ -5,8 +5,8 @@
     <string name="about_speaker">ABOUT SPEAKER</string>
     <string name="trainings">TRAININGS</string>
     <string name="toolbar_title_shedule">Schedule</string>
+    <string name="toolbar_title_speaker">Speaker</string>
     <string name="toolbar_title_quizz_data">Quizz</string>
-    <string name="toolbar_title_speaker">Schedule</string>
     <string name="toolbar_title_quizzes">Quizzes</string>
     <string name="singl">  package io.github.kbiakov.codeviewexample;\n
         \n
@@ -43,4 +43,5 @@
     <string name="quizz_answer_hint">Enter your answer here</string>
     <string name="btn_submit">Submit</string>
     <string name="str_winner">The winner is</string>
+>>>>>>> b733483f651a036a03afbb13daea2fbf2fd674f4
 </resources>

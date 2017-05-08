@@ -1,5 +1,6 @@
 package com.endava.androidamweek.utils;
 
+import com.endava.androidamweek.data.model.Database;
 import com.endava.androidamweek.data.model.Speaker;
 import com.endava.androidamweek.data.model.Training;
 
@@ -19,41 +20,53 @@ public class Utils {
         return day - 1;
     }
 
-    public String getSpeakerName(List<Speaker> speakers, int id) {
+    public String getSpeakerName( int id) {
 
-        for (int i = 0; i < speakers.size(); i++) {
-            if (speakers.get(i).getId() == id)
-                return speakers.get(i).getName();
+        for (int i = 0; i <  Database.getInstance().getSpeakers().size(); i++) {
+            if ( Database.getInstance().getSpeakers().get(i).getId() == id)
+                return  Database.getInstance().getSpeakers().get(i).getName();
         }
         return "Speaker";
     }
 
-    public Speaker getSpeaker(List<Speaker> speakers, int speakerId) {
+    public Speaker getSpeaker( int speakerId) {
 
-        for (int i = 0; i < speakers.size(); i++) {
-            if (speakers.get(i).getId() == speakerId)
-                return speakers.get(i);
+        for (int i = 0; i <  Database.getInstance().getSpeakers().size(); i++) {
+            if ( Database.getInstance().getSpeakers().get(i).getId() == speakerId)
+                return  Database.getInstance().getSpeakers().get(i);
         }
         return null;
     }
 
-    public List<Training> getSpeakerTrainings(List<Training> trainings, int speakerId) {
+    public List<Training> getSpeakerTrainings( int speakerId) {
         ArrayList<Training> list = new ArrayList<>();
-        for (int i = 0; i < trainings.size(); i++)
-            if (trainings.get(i).getSpeakerId() == speakerId) {
-                list.add(trainings.get(i));
+        for (int i = 0; i <  Database.getInstance().getTrainings().size(); i++)
+            if (Database.getInstance().getTrainings().get(i).getSpeakerId() == speakerId) {
+                list.add(Database.getInstance().getTrainings().get(i));
             }
         return list;
     }
 
-    public List<Training> getCurrentDayTrainings(List<Training> trainings, int dayOfWeek) {
+    public List<Training> getCurrentDayTrainings( int dayOfWeek) {
+
         ArrayList<Training> list = new ArrayList<>();
-        for (int i = 0; i < trainings.size(); i++) {
-            if (trainings.get(i).getDay() == dayOfWeek) {
-                list.add(trainings.get(i));
+        for (int i = 0; i <  Database.getInstance().getTrainings().size(); i++) {
+            if ( Database.getInstance().getTrainings().get(i).getDay() == dayOfWeek) {
+                list.add( Database.getInstance().getTrainings().get(i));
             }
         }
         return list;
     }
+
+    public String getSpeakerImage ( int id) {
+
+        for (int i = 0; i <  Database.getInstance().getSpeakers().size(); i++) {
+            if ( Database.getInstance().getSpeakers().get(i).getId() == id)
+                return  Database.getInstance().getSpeakers().get(i).getImageId();
+        }
+        return "Speaker";
+    }
+
+
 
 }

@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import com.endava.androidamweek.R;
 import com.endava.androidamweek.ui.main.BaseActivity;
 
+
 import butterknife.BindView;
 
 public class QuizzActivity extends BaseActivity{

@@ -4,19 +4,19 @@ import java.io.Serializable;
 
 public class Speaker implements Serializable{
 
-    private Integer imageid;
     private Integer id;
+    private String imageId;
     private String longInfo;
     private String shortInfo;
     private String name;
 
 
-    public Integer getImageid() {
-        return imageid;
+    public String getImageId() {
+        return imageId;
     }
 
-    public void setImageid(Integer imageid) {
-        this.imageid = imageid;
+    public void setImageId(String imageId) {
+        this.imageId = imageId;
     }
 
     public Integer getId() {

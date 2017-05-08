@@ -9,8 +9,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.endava.androidamweek.R;
-import com.endava.androidamweek.ui.quizz.QuizzActivity;
 import com.endava.androidamweek.ui.training.TrainingsFragment;
+import com.endava.androidamweek.ui.training.UpdateDataService;
+
 import com.endava.androidamweek.utils.Utils;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
@@ -37,6 +38,9 @@ public class ScheduleActivity extends BaseActivity implements OnTabSelectListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+        startService(new Intent(getApplicationContext(),UpdateDataService.class));
+
         ScreenManager.getInstance().setContext(this);
 
         ButterKnife.bind(this);
@@ -49,7 +53,7 @@ public class ScheduleActivity extends BaseActivity implements OnTabSelectListene
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ScheduleActivity.this, QuizzActivity.class));
+
             }
         });
 
@@ -104,4 +108,5 @@ public class ScheduleActivity extends BaseActivity implements OnTabSelectListene
                 break;
         }
     }
+
 }

@@ -1,6 +1,8 @@
 package com.endava.androidamweek.data.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class User {
     private String email;

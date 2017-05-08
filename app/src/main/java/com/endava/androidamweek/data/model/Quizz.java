@@ -2,24 +2,17 @@ package com.endava.androidamweek.data.model;
 
 import java.util.ArrayList;
 
+
 public class Quizz {
     private String date;
-    private String question;
     private String time;
+    private String codeSnippet;
+    private String conditions;
+    private String correctAnswer;
+    private String winner;
     private String title;
-    private String stream;
-//    private String codeSnippet;
-    private Boolean quizzStatus;
-    private ArrayList<Answer> answer;
-
-//    public void setCodeSnippet(String codeSnippet) {
-//        this.codeSnippet = codeSnippet;
-//    }
-//
-//    public String getCodeSnippet() {
-//
-//        return codeSnippet;
-//    }
+    private Boolean status;
+    private ArrayList<Answer> userAnswers;
 
     public String getDate() {
         return date;
@@ -27,14 +20,6 @@ public class Quizz {
 
     public void setDate(String date) {
         this.date = date;
-    }
-
-    public String getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(String question) {
-        this.question = question;
     }
 
     public String getTime() {
@@ -45,6 +30,38 @@ public class Quizz {
         this.time = time;
     }
 
+    public String getCodeSnippet() {
+        return codeSnippet;
+    }
+
+    public void setCodeSnippet(String codeSnippet) {
+        this.codeSnippet = codeSnippet;
+    }
+
+    public String getConditions() {
+        return conditions;
+    }
+
+    public void setConditions(String conditions) {
+        this.conditions = conditions;
+    }
+
+    public String getCorrectAnswer() {
+        return correctAnswer;
+    }
+
+    public void setCorrectAnswer(String correctAnswer) {
+        this.correctAnswer = correctAnswer;
+    }
+
+    public String getWinner() {
+        return winner;
+    }
+
+    public void setWinner(String winner) {
+        this.winner = winner;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -53,27 +70,19 @@ public class Quizz {
         this.title = title;
     }
 
-    public String getStream() {
-        return stream;
+    public Boolean getStatus() {
+        return status;
     }
 
-    public void setStream(String stream) {
-        this.stream = stream;
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
-    public Boolean getQuizzStatus() {
-        return quizzStatus;
+    public ArrayList<Answer> getUserAnswers() {
+        return userAnswers;
     }
 
-    public void setQuizzStatus(Boolean quizzStatus) {
-        this.quizzStatus = quizzStatus;
-    }
-
-    public ArrayList<Answer> getAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(ArrayList<Answer> answer) {
-        this.answer = answer;
+    public void setUserAnswers(ArrayList<Answer> userAnswers) {
+        this.userAnswers = userAnswers;
     }
 }

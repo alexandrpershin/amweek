@@ -18,10 +18,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".ui.speaker.SpeakerActivity"/>
+        <activity android:name=".ui.speaker.SpeakerActivity" />
+        <activity android:name=".ui.quizz.QuizzActivity" />
+        <activity android:name=".ui.main.EmailPasswordActivity"></activity>
         <activity android:name=".ui.quizz.ContentQuizzActivity"/>
-        <activity android:name=".ui.quizz.QuizzActivity"/>
+
+        <service
+            android:name=".ui.training.UpdateDataService"
+            android:enabled="true"
+            android:exported="true" />
+
 
     </application>
 

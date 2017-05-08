@@ -1,18 +1,20 @@
 package com.endava.androidamweek.ui.training;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.endava.androidamweek.R;
-import com.endava.androidamweek.data.model.Speaker;
 import com.endava.androidamweek.data.model.Training;
 import com.endava.androidamweek.ui.speaker.SpeakerClickListener;
 import com.endava.androidamweek.utils.Utils;
 import com.ramotion.foldingcell.FoldingCell;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,19 +25,16 @@ import butterknife.ButterKnife;
 class TrainingsAdapter extends RecyclerView.Adapter<TrainingsAdapter.ViewHolder> {
 
     private List<Training> trainingListForCurrentDay;
-    private List<Training> trainingListForCurrentSpeaker;
-    private List<Speaker> speakers;
+
     private SpeakerClickListener speakerClickListener;
     private Utils utils;
     private int dayOfWeek;
+    private Context context;
 
 
-
-    void updateList(List<Training> trainings,List<Speaker> speakers, int dayOfWeek) {
-        this.speakers=speakers;
+    void updateList( int dayOfWeek) {
         this.dayOfWeek=dayOfWeek;
-        this.trainingListForCurrentSpeaker=trainings;
-        this.trainingListForCurrentDay = utils.getCurrentDayTrainings(trainings,dayOfWeek);
+        this.trainingListForCurrentDay = utils.getCurrentDayTrainings( dayOfWeek);
 
         notifyDataSetChanged();
     }
@@ -53,6 +52,12 @@ class TrainingsAdapter extends RecyclerView.Adapter<TrainingsAdapter.ViewHolder>
 
         @BindView(R.id.foldTrainingTime)
         TextView foldTrainingTime;
+
+        @BindView(R.id.foldSpeakerImage)
+        ImageView foldSpeakerImage;
+
+        @BindView(R.id.unfoldSpeakerPhoto)
+        ImageView unfoldSpeakerPhoto;
 
         @BindView(R.id.foldTrainingSpeaker)
         TextView foldTrainingSpeaker;
@@ -92,13 +97,15 @@ class TrainingsAdapter extends RecyclerView.Adapter<TrainingsAdapter.ViewHolder>
         }
     }
 
-    TrainingsAdapter() {
+    TrainingsAdapter(Context context) {
+        this.context=context;
+
         trainingListForCurrentDay = new ArrayList<>();
         utils = new Utils();
     }
 
     @Override
-    public TrainingsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_training, parent, false);
         return new ViewHolder(v);
     }
@@ -111,28 +118,39 @@ class TrainingsAdapter extends RecyclerView.Adapter<TrainingsAdapter.ViewHolder>
     }
 
     private void bindFoldView(ViewHolder holder, Training item) {
+
+        Picasso.with(context)
+                .load(utils.getSpeakerImage(item.getSpeakerId()))
+                .resize(100, 100)
+                .into(holder.foldSpeakerImage);
+
         holder.foldTrainingTitle.setText(item.getTitle());
         holder.foldShortDescription.setText(item.getStream());
         holder.foldTrainingTime.setText(item.getTimeStart());
-        holder.foldTrainingSpeaker.setText(utils.getSpeakerName(speakers, item.getSpeakerId()));
+        holder.foldTrainingSpeaker.setText(utils.getSpeakerName(item.getSpeakerId()));
     }
 
 
     private void bindUnfoldView(ViewHolder holder, final Training item) {
+
+        Picasso.with(context)
+                .load(utils.getSpeakerImage(item.getSpeakerId()))
+                .resize(100, 100)
+                .into(holder.unfoldSpeakerPhoto);
 
         holder.unfoldTrainingTitle.setText(item.getTitle());
         holder.unfoldDate.setText(item.getDate());
         holder.unfoldTrainingLocation.setText(item.getLocation());
         holder.unfoldTrainingTime.setText(item.getTimeStart());
         holder.unfoldTrainingDescription.setText(item.getDescription());
-        holder.unfoldSpeakerName.setText(utils.getSpeakerName(speakers, item.getSpeakerId()));
+        holder.unfoldSpeakerName.setText(utils.getSpeakerName( item.getSpeakerId()));
 
         holder.speakerLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int speakerId = utils.getSpeaker(speakers, item.getSpeakerId()).getId();
-                speakerClickListener.onSpeakerClick(utils.getSpeaker(speakers, item.getSpeakerId()),
-                        utils.getSpeakerTrainings(trainingListForCurrentSpeaker, speakerId));
+                int speakerId = utils.getSpeaker( item.getSpeakerId()).getId();
+                speakerClickListener.onSpeakerClick(utils.getSpeaker( item.getSpeakerId()),
+                        utils.getSpeakerTrainings( speakerId));
             }
         });
     }

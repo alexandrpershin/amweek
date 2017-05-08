@@ -5,6 +5,7 @@ public class UserTraining {
 
     private Integer trainingId;
 
+
     public Integer getTrainingId() {
         return trainingId;
     }

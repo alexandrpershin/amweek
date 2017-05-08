@@ -7,12 +7,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.endava.androidamweek.R;
 import com.endava.androidamweek.data.model.Speaker;
 import com.endava.androidamweek.data.model.Training;
 import com.endava.androidamweek.ui.main.BaseActivity;
 import com.endava.androidamweek.ui.training.TrainingsFragment;
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -22,6 +26,9 @@ public class SpeakerActivity extends BaseActivity  {
 
     @BindView(R.id.speaker_name)
     TextView speakerName;
+
+    @BindView(R.id.speakerPhoto)
+    ImageView speakerPhoto;
 
     @BindView(R.id.speaker_short_info)
     TextView speakerShortInfo;
@@ -61,6 +68,12 @@ public class SpeakerActivity extends BaseActivity  {
         speakerName.setText(speaker.getName());
         speakerShortInfo.setText(speaker.getShortInfo());
         speakerDescription.setText(speaker.getLongInfo());
+
+        Picasso.with(getBaseContext())
+//                .load(R.drawable.victor_boldurat)
+                .load(speaker.getImageId())
+                .resize(1000, 1000)
+                .into(speakerPhoto);
 
         adapter.updateList(trainings);
     }

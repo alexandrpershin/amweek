@@ -2,11 +2,9 @@ package com.endava.androidamweek.data.model;
 
 
 public class Answer {
-
     private String answer;
     private String time;
     private String date;
-    private Integer questionId;
     private Integer userId;
 
 
@@ -32,14 +30,6 @@ public class Answer {
 
     public void setDate(String date) {
         this.date = date;
-    }
-
-    public Integer getQuestionId() {
-        return questionId;
-    }
-
-    public void setQuestionId(Integer questionId) {
-        this.questionId = questionId;
     }
 
     public Integer getUserId() {
