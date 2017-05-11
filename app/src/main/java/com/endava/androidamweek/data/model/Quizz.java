@@ -1,17 +1,37 @@
 package com.endava.androidamweek.data.model;
 
+import com.j256.ormlite.field.DataType;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
+@DatabaseTable
+public class Quizz  implements Serializable{
+    @DatabaseField (generatedId = true)
+    private Integer quizzId;
 
-public class Quizz {
+    @DatabaseField
     private String date;
+    @DatabaseField
     private String time;
+    @DatabaseField
     private String codeSnippet;
+    @DatabaseField
     private String conditions;
+    @DatabaseField
     private String correctAnswer;
+    @DatabaseField
     private String winner;
+    @DatabaseField
     private String title;
+    @DatabaseField
     private Boolean status;
+    @DatabaseField
+    private String firebaseFieldName;
+
+    @DatabaseField(dataType= DataType.SERIALIZABLE)
     private ArrayList<Answer> userAnswers;
 
     public String getDate() {
@@ -84,5 +104,13 @@ public class Quizz {
 
     public void setUserAnswers(ArrayList<Answer> userAnswers) {
         this.userAnswers = userAnswers;
+    }
+
+    public String getFirebaseFieldName() {
+        return firebaseFieldName;
+    }
+
+    public void setFirebaseFieldName(String firebaseFieldName) {
+        this.firebaseFieldName = firebaseFieldName;
     }
 }

@@ -1,6 +1,7 @@
 package com.endava.androidamweek.utils;
 
-import com.endava.androidamweek.data.model.Database;
+import com.endava.androidamweek.data.localDB.LocalDatabase;
+import com.endava.androidamweek.data.model.Quizz;
 import com.endava.androidamweek.data.model.Speaker;
 import com.endava.androidamweek.data.model.Training;
 
@@ -20,53 +21,55 @@ public class Utils {
         return day - 1;
     }
 
-    public String getSpeakerName( int id) {
+    public String getSpeakerName(int id) {
 
-        for (int i = 0; i <  Database.getInstance().getSpeakers().size(); i++) {
-            if ( Database.getInstance().getSpeakers().get(i).getId() == id)
-                return  Database.getInstance().getSpeakers().get(i).getName();
+        for (int i = 0; i < LocalDatabase.getInstance().getSpeakers().size(); i++) {
+            if (LocalDatabase.getInstance().getSpeakers().get(i).getId() == id)
+                return LocalDatabase.getInstance().getSpeakers().get(i).getName();
         }
         return "Speaker";
     }
 
-    public Speaker getSpeaker( int speakerId) {
+    public Speaker getSpeaker(int speakerId) {
 
-        for (int i = 0; i <  Database.getInstance().getSpeakers().size(); i++) {
-            if ( Database.getInstance().getSpeakers().get(i).getId() == speakerId)
-                return  Database.getInstance().getSpeakers().get(i);
+        for (int i = 0; i < LocalDatabase.getInstance().getSpeakers().size(); i++) {
+            if (LocalDatabase.getInstance().getSpeakers().get(i).getId() == speakerId)
+                return LocalDatabase.getInstance().getSpeakers().get(i);
         }
         return null;
     }
 
-    public List<Training> getSpeakerTrainings( int speakerId) {
+    public List<Training> getSpeakerTrainings(int speakerId) {
         ArrayList<Training> list = new ArrayList<>();
-        for (int i = 0; i <  Database.getInstance().getTrainings().size(); i++)
-            if (Database.getInstance().getTrainings().get(i).getSpeakerId() == speakerId) {
-                list.add(Database.getInstance().getTrainings().get(i));
+        for (int i = 0; i < LocalDatabase.getInstance().getTrainings().size(); i++)
+            if (LocalDatabase.getInstance().getTrainings().get(i).getSpeakerId() == speakerId) {
+                list.add(LocalDatabase.getInstance().getTrainings().get(i));
             }
         return list;
     }
 
-    public List<Training> getCurrentDayTrainings( int dayOfWeek) {
-
+    public List<Training> getCurrentDayTrainings(int dayOfWeek) {
         ArrayList<Training> list = new ArrayList<>();
-        for (int i = 0; i <  Database.getInstance().getTrainings().size(); i++) {
-            if ( Database.getInstance().getTrainings().get(i).getDay() == dayOfWeek) {
-                list.add( Database.getInstance().getTrainings().get(i));
+        for (int i = 0; i < LocalDatabase.getInstance().getTrainings().size(); i++) {
+            if (LocalDatabase.getInstance().getTrainings().get(i).getDay() == dayOfWeek) {
+                list.add(LocalDatabase.getInstance().getTrainings().get(i));
             }
         }
         return list;
     }
 
-    public String getSpeakerImage ( int id) {
+    public String getSpeakerImage(int id) {
 
-        for (int i = 0; i <  Database.getInstance().getSpeakers().size(); i++) {
-            if ( Database.getInstance().getSpeakers().get(i).getId() == id)
-                return  Database.getInstance().getSpeakers().get(i).getImageId();
+        for (int i = 0; i < LocalDatabase.getInstance().getSpeakers().size(); i++) {
+            if (LocalDatabase.getInstance().getSpeakers().get(i).getId() == id)
+                return LocalDatabase.getInstance().getSpeakers().get(i).getImageId();
         }
-        return "Speaker";
+        return "image";
     }
 
 
+    public List<Quizz> getQuizzes() {
+        return LocalDatabase.getInstance().getQuizzes();
 
+    }
 }

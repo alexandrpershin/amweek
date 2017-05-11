@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.endava.androidamweek.R;
+import com.endava.androidamweek.data.localDB.LocalDatabase;
 import com.endava.androidamweek.data.model.Database;
 import com.endava.androidamweek.data.model.User;
 import com.endava.androidamweek.data.model.UserTraining;
@@ -117,8 +118,8 @@ public class EmailPasswordActivity extends AppCompatActivity implements GoogleAp
 
     private void checkIfUserExist(GoogleSignInAccount account) {
         Boolean flag = false;
-        for (int i = 0; i < Database.getInstance().getUsers().size(); i++) {
-            if (Database.getInstance().getUsers().get(i).getId().equals(account.getId()))
+        for (int i = 0; i < LocalDatabase.getInstance().getUsers().size(); i++) {
+            if (LocalDatabase.getInstance().getUsers().get(i).getId().equals(account.getId()))
                 flag = true;
         }
         if (flag == false)

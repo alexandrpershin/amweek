@@ -1,25 +1,45 @@
 package com.endava.androidamweek.data.model;
 
+import android.support.annotation.NonNull;
+
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
 import java.io.Serializable;
 
-public class Training implements Serializable {
-
+@DatabaseTable
+public class Training implements Serializable, Comparable<Training>{
+    private static final long serialVersionUID = -7874823823497497347L;
+    @DatabaseField
     private String date;
+    @DatabaseField
     private Integer day;
+    @DatabaseField
     private Integer id;
+    @DatabaseField
     private Integer targetAudience;
+    @DatabaseField
     private Integer speakerId;
+    @DatabaseField
     private String location;
+    @DatabaseField
     private Boolean remoteCall;
+    @DatabaseField
     private String timeStart;
+    @DatabaseField
     private String timeEnd;
+    @DatabaseField
     private String title;
+    @DatabaseField
     private String language;
+    @DatabaseField
     private String description;
+    @DatabaseField
     private String stream;
+    @DatabaseField
     private String type;
 
-
+public Training(){}
 
     public String getDate() {
         return date;
@@ -131,5 +151,12 @@ public class Training implements Serializable {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    @Override
+    public int compareTo(@NonNull Training o) {
+        String compareTime = ((Training) o).getTimeStart();
+
+        return this.getTimeStart().compareTo(compareTime);
     }
 }

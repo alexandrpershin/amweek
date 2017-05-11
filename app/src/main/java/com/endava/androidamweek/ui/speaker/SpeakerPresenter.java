@@ -4,7 +4,7 @@ import com.endava.androidamweek.data.callbacks.SpeakerCallback;
 
 class SpeakerPresenter {
 
-    void loadSpeakers(SpeakerCallback speakerCallback){
+    void loadSpeakers(SpeakerCallback speakerCallback) {
 
     }
 }

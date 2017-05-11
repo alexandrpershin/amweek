@@ -40,15 +40,20 @@ dependencies {
     // Circle ImageView
     compile 'de.hdodenhof:circleimageview:' + rootProject.ext.roundImageviewVersion
 
-    compile 'com.google.firebase:firebase-auth:10.0.1'
+    compile 'com.google.firebase:firebase-auth:' + rootProject.ext.firebaseVersion
 
-    compile 'com.google.android.gms:play-services-auth:10.0.1'
+    compile 'com.google.android.gms:play-services-auth:'+ rootProject.ext.playServicesAuthVersion
 
-    compile 'com.firebaseui:firebase-ui-storage:0.6.0'
 
-    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.firebaseui:firebase-ui-storage:'+ rootProject.ext.firebaseStorageVersion
+
+
+    compile 'com.squareup.picasso:picasso:' + rootProject.ext.picassoVersion
+
 
     // CodeView
     compile 'com.github.softwee:codeview-android:' + rootProject.ext.codeView
+
+    compile  'com.j256.ormlite:ormlite-android:'+ rootProject.ext.ormliteVersion
 }
 apply plugin: 'com.google.gms.google-services'

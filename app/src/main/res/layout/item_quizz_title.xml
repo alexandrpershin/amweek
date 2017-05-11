@@ -17,6 +17,7 @@
         android:padding ="@dimen/min_spacing">
 
         <ImageView
+            android:id="@+id/quizz_image"
             android:layout_width="90dp"
             android:layout_height="90dp"
             android:adjustViewBounds="true"

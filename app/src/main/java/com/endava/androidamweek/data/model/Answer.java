@@ -1,11 +1,23 @@
 package com.endava.androidamweek.data.model;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
-public class Answer {
+import java.io.Serializable;
+
+@DatabaseTable
+public class Answer implements Serializable {
+    @DatabaseField
     private String answer;
+    @DatabaseField
     private String time;
+    @DatabaseField
     private String date;
-    private Integer userId;
+    @DatabaseField
+    private String userId;
+    @DatabaseField (foreign = true, foreignAutoRefresh = true, foreignAutoCreate = true)
+    private Quizz quizz;
+
 
 
     public String getAnswer() {
@@ -32,11 +44,11 @@ public class Answer {
         this.date = date;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 }
