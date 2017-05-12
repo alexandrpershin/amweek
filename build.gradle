@@ -33,4 +33,8 @@ ext {
     foldingcellVersion = '1.1.0'
     roundImageviewVersion = '2.1.0'
     codeView = '1.2.0'
+    playServicesAuthVersion = '10.0.1'
+    firebaseStorageVersion='0.6.0'
+    picassoVersion='2.5.2'
+    ormliteVersion='4.46'
 }

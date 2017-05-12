@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.endava.androidamweek.R;
-import com.endava.androidamweek.data.model.Database;
+import com.endava.androidamweek.data.localDB.LocalDatabase;
 import com.endava.androidamweek.data.model.Speaker;
 import com.endava.androidamweek.data.model.Training;
 import com.endava.androidamweek.ui.speaker.SpeakerActivity;
@@ -51,6 +51,7 @@ public class TrainingsFragment extends Fragment implements  SpeakerClickListener
 
         ButterKnife.bind(this, view);
 
+        LocalDatabase.getInstance().setContext(getContext());
 
          bundle = getArguments();
         dayOfWeek=bundle.getInt(DAY_OF_WEEK);
@@ -65,11 +66,12 @@ public class TrainingsFragment extends Fragment implements  SpeakerClickListener
 
         adapter.setOnSpeakerClickListener(this);
 
+
+        if (!isDatabaseNull())
+        adapter.updateList(dayOfWeek);
+
         recyclerView.setAdapter(adapter);
 
-        if(Database.getInstance().getSpeakers()!=null && Database.getInstance().getTrainings()!=null) {
-            adapter.updateList(dayOfWeek);
-        }
         return view;
     }
 
@@ -94,7 +96,7 @@ public class TrainingsFragment extends Fragment implements  SpeakerClickListener
     private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Toast.makeText(context, "Data has update", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Data has updated", Toast.LENGTH_SHORT).show();
             adapter.updateList(dayOfWeek);
         }
     };
@@ -105,5 +107,12 @@ public class TrainingsFragment extends Fragment implements  SpeakerClickListener
 
         LocalBroadcastManager.getInstance(getContext()).registerReceiver(mMessageReceiver, new IntentFilter("UpdateData"));
     }
+
+    public boolean isDatabaseNull() {
+        return (LocalDatabase.getInstance().getSpeakers() == null || LocalDatabase.getInstance().getTrainings() == null
+                || LocalDatabase.getInstance().getUsers() == null || LocalDatabase.getInstance().getQuizzes() == null);
+
+    }
+
 
 }

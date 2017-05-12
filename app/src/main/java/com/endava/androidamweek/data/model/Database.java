@@ -1,7 +1,5 @@
 package com.endava.androidamweek.data.model;
 
-import android.util.Log;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -14,7 +12,7 @@ import java.util.Map;
 
 public class Database {
 
-    private static Database database ;
+    private static Database database;
 
     private DatabaseReference databaseReference;
     private DatabaseReference quizzesReferece;
@@ -42,32 +40,10 @@ public class Database {
     }
 
     public static Database getInstance() {
-        if(database==null)
-            database  = new Database();
+        if (database == null)
+            database = new Database();
 
         return database;
-    }
-
-    public static   void checkInternetConnectionState(){
-       connectedRef = FirebaseDatabase.getInstance().getReference(".info/connected");
-
-        connectedRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                connected = snapshot.getValue(Boolean.class);
-                if(connected==false)
-                    Log.i("Connection","disconnect");
-                else Log.i("Connection","connect");
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                System.err.println("Listener was cancelled");
-            }
-        });
-
-
     }
 
     private void getDataFromFirebase() {
@@ -87,7 +63,7 @@ public class Database {
                     map.put(data.getKey(), training);
                 }
                 trainings = new ArrayList<>(map.values());
-                
+
             }
 
             @Override
@@ -102,7 +78,7 @@ public class Database {
         getSpeakersReferece().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Map<String, Speaker> map = new HashMap< >();
+                Map<String, Speaker> map = new HashMap<>();
 
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     Speaker speaker = data.getValue(Speaker.class);
@@ -123,13 +99,13 @@ public class Database {
         getUsersReferece().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Map<String, User> map = new HashMap< >();
+                Map<String, User> map = new HashMap<>();
                 ArrayList<UserTraining> trainingslist = new ArrayList<>();
 
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     User user = data.getValue(User.class);
 
-                    for (DataSnapshot dataTrainings : data.child("trainings").getChildren()) {
+                    for (DataSnapshot dataTrainings : data.child("training").getChildren()) {
                         UserTraining speakerTrainings = dataTrainings.getValue(UserTraining.class);
                         trainingslist.add(speakerTrainings);
                     }
@@ -151,21 +127,23 @@ public class Database {
         getQuizzesReferece().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Map<String, Quizz> map = new HashMap< >();
+                Map<String, Quizz> map = new HashMap<>();
                 ArrayList<Answer> answerslist = new ArrayList<>();
 
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     Quizz quizz = data.getValue(Quizz.class);
 
-                    for (DataSnapshot dataTrainings : data.child("answers").getChildren()) {
+                    for (DataSnapshot dataTrainings : data.child("userAnswer").getChildren()) {
                         Answer answer = dataTrainings.getValue(Answer.class);
                         answerslist.add(answer);
                     }
                     quizz.setUserAnswers(answerslist);
+                    quizz.setFirebaseFieldName(data.getKey());
                     map.put(data.getKey(), quizz);
                     answerslist = new ArrayList<Answer>();
                 }
                 quizzes = new ArrayList<>(map.values());
+
             }
 
             @Override
@@ -175,11 +153,11 @@ public class Database {
         });
     }
 
-    private DatabaseReference getDatabaseReference() {
+    public DatabaseReference getDatabaseReference() {
         return databaseReference;
     }
 
-    private DatabaseReference getQuizzesReferece() {
+    public DatabaseReference getQuizzesReferece() {
         return quizzesReferece;
     }
 
@@ -187,11 +165,11 @@ public class Database {
         return usersReferece;
     }
 
-    private DatabaseReference getTrainingsReferece() {
+    public DatabaseReference getTrainingsReferece() {
         return trainingsReferece;
     }
 
-    private DatabaseReference getSpeakersReferece() {
+    public DatabaseReference getSpeakersReferece() {
         return speakersReferece;
     }
 

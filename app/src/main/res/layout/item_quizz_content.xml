@@ -18,12 +18,10 @@
         android:id="@+id/codeview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/answer_box"
-        android:layout_below="@+id/question_box"
-        android:layout_marginBottom="@dimen/medium_spacing"
         android:visibility="visible"
-        android:layout_marginTop="@dimen/medium_spacing"
-        android:isScrollContainer="true">
+        android:isScrollContainer="true"
+        android:layout_below="@+id/question_box"
+        android:layout_alignParentStart="true">
 
     </io.github.kbiakov.codeview.CodeView>
 

@@ -38,13 +38,6 @@ class SpeakerTrainingsAdapter extends RecyclerView.Adapter<SpeakerTrainingsAdapt
         @BindView(R.id.speaker_training_date)
         TextView speakerTrainingDate;
 
-
-
-
-
-
-
-
         ViewHolder(View v) {
             super(v);
             ButterKnife.bind(this, v);

@@ -22,12 +22,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SpeakerActivity extends BaseActivity  {
+public class SpeakerActivity extends BaseActivity {
 
     @BindView(R.id.speaker_name)
     TextView speakerName;
 
-    @BindView(R.id.speakerPhoto)
+    @BindView(R.id.speaker_photo)
     ImageView speakerPhoto;
 
     @BindView(R.id.speaker_short_info)
@@ -44,7 +44,7 @@ public class SpeakerActivity extends BaseActivity  {
 
     SpeakerTrainingsAdapter adapter;
     private Speaker speaker;
-     private   List<Training> trainings;
+    private List<Training> trainings;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,7 +70,6 @@ public class SpeakerActivity extends BaseActivity  {
         speakerDescription.setText(speaker.getLongInfo());
 
         Picasso.with(getBaseContext())
-//                .load(R.drawable.victor_boldurat)
                 .load(speaker.getImageId())
                 .resize(1000, 1000)
                 .into(speakerPhoto);

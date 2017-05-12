@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.endava.androidamweek.R;
+import com.endava.androidamweek.data.localDB.LocalDatabase;
 import com.endava.androidamweek.data.model.Training;
 import com.endava.androidamweek.ui.speaker.SpeakerClickListener;
 import com.endava.androidamweek.utils.Utils;
@@ -17,6 +18,7 @@ import com.ramotion.foldingcell.FoldingCell;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -33,6 +35,7 @@ class TrainingsAdapter extends RecyclerView.Adapter<TrainingsAdapter.ViewHolder>
 
 
     void updateList( int dayOfWeek) {
+
         this.dayOfWeek=dayOfWeek;
         this.trainingListForCurrentDay = utils.getCurrentDayTrainings( dayOfWeek);
 
@@ -99,7 +102,7 @@ class TrainingsAdapter extends RecyclerView.Adapter<TrainingsAdapter.ViewHolder>
 
     TrainingsAdapter(Context context) {
         this.context=context;
-
+        LocalDatabase.getInstance().readFromDB();
         trainingListForCurrentDay = new ArrayList<>();
         utils = new Utils();
     }
@@ -112,6 +115,7 @@ class TrainingsAdapter extends RecyclerView.Adapter<TrainingsAdapter.ViewHolder>
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        Collections.sort(trainingListForCurrentDay);
         Training item = trainingListForCurrentDay.get(position);
         bindFoldView(holder, item);
         bindUnfoldView(holder, item);

@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.endava.androidamweek.R;
+import com.endava.androidamweek.ui.quizz.QuizzActivity;
 import com.endava.androidamweek.ui.training.TrainingsFragment;
 import com.endava.androidamweek.ui.training.UpdateDataService;
 
@@ -53,6 +54,7 @@ public class ScheduleActivity extends BaseActivity implements OnTabSelectListene
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(ScheduleActivity.this, QuizzActivity.class));
 
             }
         });
