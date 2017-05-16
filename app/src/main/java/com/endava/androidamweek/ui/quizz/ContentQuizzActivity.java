@@ -1,27 +1,26 @@
 package com.endava.androidamweek.ui.quizz;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.endava.androidamweek.R;
+import com.endava.androidamweek.data.mail.MailSenderClass;
 import com.endava.androidamweek.data.model.Answer;
 import com.endava.androidamweek.data.model.Database;
 import com.endava.androidamweek.data.model.Quizz;
 import com.endava.androidamweek.ui.main.BaseActivity;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.OptionalPendingResult;
-import com.google.android.gms.common.api.ResultCallback;
+import com.endava.androidamweek.ui.main.SignInActivity;
 import com.google.firebase.database.DatabaseReference;
 
 import java.text.Format;
@@ -33,7 +32,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.kbiakov.codeview.CodeView;
 
-public class ContentQuizzActivity extends BaseActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
+public class ContentQuizzActivity extends BaseActivity implements View.OnClickListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -52,9 +51,22 @@ public class ContentQuizzActivity extends BaseActivity implements GoogleApiClien
     Button btnSubmit;
 
     private Quizz quizz;
-    private GoogleApiClient mGoogleApiClient;
+
     private String userId;
-    private Boolean UserIsLoggedIn = false;
+    private String timeString;
+    private String dateString;
+
+    private SharedPreferences sharedPreferences;
+
+    private static String USER_ID = "userID";
+    private String ACCOUNT_PREFERENCES = "accountPreferences";
+
+    private static String USER_EMAIL = "email";
+    private static String USER_NAME = "userName";
+    public static int TYPE_WIFI = 1;
+    public static int TYPE_MOBILE = 2;
+    public static int TYPE_NOT_CONNECTED = 0;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,68 +80,72 @@ public class ContentQuizzActivity extends BaseActivity implements GoogleApiClien
 
         codeView.setCode(quizz.getCodeSnippet(), "java");
 
-        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this, this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, googleSignInOptions)
-                .build();
+        sharedPreferences = getSharedPreferences(ACCOUNT_PREFERENCES, MODE_PRIVATE);
+        userId = sharedPreferences.getString(USER_ID, "");
 
         btnSubmit.setOnClickListener(this);
     }
 
+
+
     @Override
     public void onClick(View v) {
+
+        userId = sharedPreferences.getString(USER_ID, "");
+
+        if (getConnectivityStatus(getApplication()) == 0) {
+            Toast.makeText(ContentQuizzActivity.this, "No internet  connection", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (userId.equals("")) {
+            Toast.makeText(ContentQuizzActivity.this, "Please sign in", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(ContentQuizzActivity.this, SignInActivity.class));
+            return;
+        }
 
         if (answerBox.getText().toString().equals("")) {
             Toast.makeText(ContentQuizzActivity.this, "Please enter the answer", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        checkIfUserIsSignIn();
-
-        if (UserIsLoggedIn) {
+        if (!userId.equals("")) {
             createAnswer();
-            UserIsLoggedIn = false;
+            sendEmail();
             answerBox.setText("");
-        } else {
-            Toast.makeText(ContentQuizzActivity.this, "Please sign in", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void checkIfUserIsSignIn() {
-        OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
-        if (opr.isDone()) {
-            GoogleSignInResult result = opr.get();
-            handleSignInResult(result);
-        } else {
-            opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
-                @Override
-                public void onResult(GoogleSignInResult googleSignInResult) {
-                    handleSignInResult(googleSignInResult);
-                }
-            });
-        }
-    }
-
-    private void handleSignInResult(GoogleSignInResult result) {
-        if (result.isSuccess()) {
-            GoogleSignInAccount account = result.getSignInAccount();
-            UserIsLoggedIn = true;
-            userId = account.getId();
-        }
-    }
 
     @Override
     protected int getLayoutId() {
         return R.layout.item_quizz_content;
     }
 
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+    private void sendEmail() {
+
+        String title = quizz.getTitle();
+        String answer = answerBox.getText().toString();
+        final String email = sharedPreferences.getString(USER_EMAIL, "");
+        final String name = sharedPreferences.getString(USER_NAME, "");
+
+        final String body = "Quizz title : " + title + "\n\n Answer:  \n\n "
+                + answer + "\n\n" + name + "\n" + email + "\n\n" + timeString + "\n" + dateString;
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    new MailSenderClass("endava.amweek@gmail.com", "endavaamweek")
+                            .sendMail("Quizz answer", body.toString(), "name",
+                                    "Alexandr-pershin@mail.ru", "");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
+
 
     private void createAnswer() {
         DatabaseReference answerReference = Database.getInstance().getQuizzesReferece().child(quizz.getFirebaseFieldName()).child("userAnswer");
@@ -138,9 +154,9 @@ public class ContentQuizzActivity extends BaseActivity implements GoogleApiClien
         Date currentDate = Calendar.getInstance().getTime();
 
         Format formatter = new SimpleDateFormat("yyyy.MM.dd");
-        String dateString = formatter.format(currentDate);
+        dateString = formatter.format(currentDate);
         formatter = new SimpleDateFormat("HH:mm:ss");
-        String timeString = formatter.format(currentDate);
+        timeString = formatter.format(currentDate);
 
         Answer answer = new Answer();
         answer.setAnswer(answerBox.getText().toString());
@@ -152,4 +168,21 @@ public class ContentQuizzActivity extends BaseActivity implements GoogleApiClien
 
         Toast.makeText(this, "Your answer has sent successfully", Toast.LENGTH_SHORT).show();
     }
+
+
+    public static int getConnectivityStatus(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        if (null != activeNetwork) {
+            if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI)
+                return TYPE_WIFI;
+
+            if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE)
+                return TYPE_MOBILE;
+        }
+        return TYPE_NOT_CONNECTED;
+    }
+
 }

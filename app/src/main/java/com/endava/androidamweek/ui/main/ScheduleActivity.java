@@ -12,7 +12,6 @@ import com.endava.androidamweek.R;
 import com.endava.androidamweek.ui.quizz.QuizzActivity;
 import com.endava.androidamweek.ui.training.TrainingsFragment;
 import com.endava.androidamweek.ui.training.UpdateDataService;
-
 import com.endava.androidamweek.utils.Utils;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
@@ -34,13 +33,14 @@ public class ScheduleActivity extends BaseActivity implements OnTabSelectListene
     @BindView(R.id.mainContent)
     CoordinatorLayout view;
 
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-        startService(new Intent(getApplicationContext(),UpdateDataService.class));
+        intent = new Intent(getApplicationContext(), UpdateDataService.class);
+        startService(intent);
 
         ScreenManager.getInstance().setContext(this);
 
@@ -50,18 +50,16 @@ public class ScheduleActivity extends BaseActivity implements OnTabSelectListene
         bottomBar.setOnTabSelectListener(this);
         setSupportActionBar(toolbar);
 
-
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ScheduleActivity.this, QuizzActivity.class));
-
+//                startActivity(new Intent(ScheduleActivity.this, SignInActivity.class));
             }
         });
-
         setCurrentDay();
-
     }
+
 
     @Override
     protected int getLayoutId() {
@@ -111,4 +109,10 @@ public class ScheduleActivity extends BaseActivity implements OnTabSelectListene
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopService(intent);
+    }
 }
+

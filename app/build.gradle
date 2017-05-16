@@ -20,7 +20,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -39,21 +39,15 @@ dependencies {
     compile 'com.ramotion.foldingcell:folding-cell:' + rootProject.ext.foldingcellVersion
     // Circle ImageView
     compile 'de.hdodenhof:circleimageview:' + rootProject.ext.roundImageviewVersion
-
     compile 'com.google.firebase:firebase-auth:' + rootProject.ext.firebaseVersion
-
-    compile 'com.google.android.gms:play-services-auth:'+ rootProject.ext.playServicesAuthVersion
-
-
-    compile 'com.firebaseui:firebase-ui-storage:'+ rootProject.ext.firebaseStorageVersion
-
-
+    compile 'com.google.android.gms:play-services-auth:' + rootProject.ext.playServicesAuthVersion
+    compile 'com.firebaseui:firebase-ui-storage:' + rootProject.ext.firebaseStorageVersion
     compile 'com.squareup.picasso:picasso:' + rootProject.ext.picassoVersion
-
-
     // CodeView
     compile 'com.github.softwee:codeview-android:' + rootProject.ext.codeView
-
-    compile  'com.j256.ormlite:ormlite-android:'+ rootProject.ext.ormliteVersion
+    compile 'com.j256.ormlite:ormlite-android:' + rootProject.ext.ormliteVersion
+    compile files('D:/android-amweek/libs/activation.jar')
+    compile files('D:/android-amweek/libs/lib_mail.jar')
+    compile files('D:/android-amweek/libs/additionnal.jar')
 }
 apply plugin: 'com.google.gms.google-services'

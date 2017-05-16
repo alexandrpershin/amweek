@@ -8,7 +8,7 @@ import com.j256.ormlite.table.DatabaseTable;
 import java.io.Serializable;
 
 @DatabaseTable
-public class Training implements Serializable, Comparable<Training>{
+public class Training implements Serializable, Comparable<Training> {
     private static final long serialVersionUID = -7874823823497497347L;
     @DatabaseField
     private String date;
@@ -39,7 +39,8 @@ public class Training implements Serializable, Comparable<Training>{
     @DatabaseField
     private String type;
 
-public Training(){}
+    public Training() {
+    }
 
     public String getDate() {
         return date;

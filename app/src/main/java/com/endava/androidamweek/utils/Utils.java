@@ -1,9 +1,13 @@
 package com.endava.androidamweek.utils;
 
 import com.endava.androidamweek.data.localDB.LocalDatabase;
+import com.endava.androidamweek.data.model.Database;
 import com.endava.androidamweek.data.model.Quizz;
 import com.endava.androidamweek.data.model.Speaker;
 import com.endava.androidamweek.data.model.Training;
+import com.endava.androidamweek.data.model.User;
+import com.endava.androidamweek.data.model.UserTraining;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -72,4 +76,64 @@ public class Utils {
         return LocalDatabase.getInstance().getQuizzes();
 
     }
+
+    public User getUserById(String id) {
+        for (int i = 0; i < LocalDatabase.getInstance().getUsers().size(); i++)
+
+            if (LocalDatabase.getInstance().getUsers().get(i).getId().equals(id)) {
+
+                return LocalDatabase.getInstance().getUsers().get(i);
+            }
+
+        return null;
+
+    }
+
+    public void addTrainingToUser(String userId, Training training) {
+        User user = getUserById(userId);
+        DatabaseReference userTrainingReference = Database.getInstance().getUsersReferece().child(user.getFirebaseFieldName()).child("training");
+        DatabaseReference newUserTraining = userTrainingReference.push();
+
+        UserTraining userTraining = new UserTraining();
+        userTraining.setTrainingId(training.getId());
+
+        user.getTraining().add(userTraining);
+
+        newUserTraining.setValue(userTraining);
+
+
+    }
+
+    public boolean userHasCurrentTraining(String userId, Training trainig) {
+        User user = getUserById(userId);
+        boolean userHasCurrentTraining = false;
+        for (int i = 0; i < user.getTraining().size(); i++) {
+
+            if (user.getTraining().get(i).getTrainingId().equals(trainig.getId()))
+                userHasCurrentTraining = true;
+
+        }
+
+        return userHasCurrentTraining;
+    }
+
+    public void removeTrainingToUser(String userID, Training item) {
+        User user = getUserById(userID);
+
+        UserTraining userTraining = getUserTrainingById(user, item.getId());
+
+        Database.getInstance().getUsersReferece().child(user.getFirebaseFieldName()).child("training")
+                .child(userTraining.getFirebaseFieldName()).removeValue();
+
+    }
+
+    private UserTraining getUserTrainingById(User user, Integer id) {
+        for (int i = 0; i < user.getTraining().size(); i++) {
+            if (user.getTraining().get(i).getTrainingId().equals(id))
+                return user.getTraining().get(i);
+        }
+        return null;
+    }
+
+
 }

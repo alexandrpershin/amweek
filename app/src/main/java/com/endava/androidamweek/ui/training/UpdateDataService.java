@@ -8,7 +8,6 @@ import android.os.IBinder;
 import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 
 import com.endava.androidamweek.R;
 import com.endava.androidamweek.data.localDB.LocalDatabase;
@@ -24,9 +23,10 @@ import java.util.concurrent.Executors;
 
 
 public class UpdateDataService extends Service {
-    ExecutorService executorService;
-    Notify notify;
-    Boolean isFirsTimeRunning;
+    private ExecutorService executorService;
+    private Notify notify;
+    private Boolean isFirsTimeRunning;
+    private Boolean stop;
 
     public boolean isDatabaseNull() {
         return (Database.getInstance().getSpeakers() == null || Database.getInstance().getTrainings() == null
@@ -48,6 +48,7 @@ public class UpdateDataService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        stop = true;
     }
 
 
@@ -58,7 +59,7 @@ public class UpdateDataService extends Service {
         notify = new Notify();
         executorService = Executors.newFixedThreadPool(1);
         isFirsTimeRunning = true;
-
+        stop = false;
     }
 
     private void sendMessage() {
@@ -95,13 +96,14 @@ public class UpdateDataService extends Service {
 
                     NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext())
                             .setContentIntent(pendingIntent)
-                            .setSmallIcon(R.drawable.ic_star)
+                            .setSmallIcon(R.drawable.ic_fill_star)
                             .setAutoCancel(true)
                             .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
                             .setVibrate(new long[]{1000, 1000})
                             .setContentTitle("New quizz!");
                     NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
                     notificationManager.notify(1, builder.build());
+
                     sendMessage();
                 }
             }
@@ -128,7 +130,9 @@ public class UpdateDataService extends Service {
         Database.getInstance().getDatabaseReference().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                sendMessage();
+                if (!stop) {
+                    sendMessage();
+                }
             }
 
             @Override
@@ -138,4 +142,5 @@ public class UpdateDataService extends Service {
         });
 
     }
+
 }
