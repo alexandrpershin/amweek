@@ -24,7 +24,9 @@
         <activity android:name=".ui.quizz.QuizzActivity" />
         <activity android:name=".ui.main.SignInActivity"></activity>
         <activity android:name=".ui.quizz.ContentQuizzActivity" />
-
+        <receiver
+            android:name=".ui.training.NotificationPublisher"
+            android:enabled="true" />
         <service
             android:name=".ui.training.UpdateDataService"
             android:enabled="true"

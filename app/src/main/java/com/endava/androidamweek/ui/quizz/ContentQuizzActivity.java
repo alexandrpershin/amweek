@@ -113,6 +113,8 @@ public class ContentQuizzActivity extends BaseActivity implements View.OnClickLi
             createAnswer();
             sendEmail();
             answerBox.setText("");
+
+            finish();
         }
     }
 

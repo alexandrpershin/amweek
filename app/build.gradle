@@ -46,8 +46,11 @@ dependencies {
     // CodeView
     compile 'com.github.softwee:codeview-android:' + rootProject.ext.codeView
     compile 'com.j256.ormlite:ormlite-android:' + rootProject.ext.ormliteVersion
-    compile files('D:/android-amweek/libs/activation.jar')
-    compile files('D:/android-amweek/libs/lib_mail.jar')
-    compile files('D:/android-amweek/libs/additionnal.jar')
+
+    compile files('libs/activation.jar')
+    compile files('lib_mail.jar')
+    compile files('libs/additionnal.jar')
+
+
 }
 apply plugin: 'com.google.gms.google-services'
