@@ -4,11 +4,10 @@ import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 @DatabaseTable
-public class User {
+public class User implements Serializable {
 
     @DatabaseField
     private String email;
@@ -26,9 +25,20 @@ public class User {
     private Integer userId;
 
     @DatabaseField(dataType= DataType.SERIALIZABLE)
-    private ArrayList<UserTraining> training;
+    private ArrayList<UserTraining> trainings;
+
+    @DatabaseField
+    private String firebaseFieldName;
 
     public User() {
+    }
+
+    public String getFirebaseFieldName() {
+        return firebaseFieldName;
+    }
+
+    public void setFirebaseFieldName(String firebaseFieldName) {
+        this.firebaseFieldName = firebaseFieldName;
     }
 
     public String getEmail() {
@@ -64,10 +74,10 @@ public class User {
     }
 
     public ArrayList<UserTraining> getTraining() {
-        return training;
+        return trainings;
     }
 
-    public void setTraining(ArrayList<UserTraining> training) {
-        this.training = training;
+    public void setTrainings(ArrayList<UserTraining> training) {
+        this.trainings = training;
     }
 }

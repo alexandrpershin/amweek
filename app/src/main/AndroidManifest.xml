@@ -3,8 +3,8 @@
     package="com.endava.androidamweek">
 
     <uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.VIBRATE"></uses-permission>
-
+    <uses-permission android:name="android.permission.VIBRATE"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -22,8 +22,8 @@
         </activity>
         <activity android:name=".ui.speaker.SpeakerActivity" />
         <activity android:name=".ui.quizz.QuizzActivity" />
-        <activity android:name=".ui.main.EmailPasswordActivity"></activity>
-        <activity android:name=".ui.quizz.ContentQuizzActivity"/>
+        <activity android:name=".ui.main.SignInActivity"></activity>
+        <activity android:name=".ui.quizz.ContentQuizzActivity" />
 
         <service
             android:name=".ui.training.UpdateDataService"

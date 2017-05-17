@@ -1,12 +1,12 @@
 package com.endava.androidamweek.data.model;
 
-import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.Serializable;
+
 @DatabaseTable
-public class Speaker implements Serializable{
+public class Speaker implements Serializable {
     private static final long serialVersionUID = -7874823823497497357L;
 
     public Speaker() {

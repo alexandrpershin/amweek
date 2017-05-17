@@ -1,6 +1,9 @@
 package com.endava.androidamweek.ui.training;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,10 +11,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.endava.androidamweek.R;
 import com.endava.androidamweek.data.localDB.LocalDatabase;
 import com.endava.androidamweek.data.model.Training;
+import com.endava.androidamweek.ui.main.SignInActivity;
 import com.endava.androidamweek.ui.speaker.SpeakerClickListener;
 import com.endava.androidamweek.utils.Utils;
 import com.ramotion.foldingcell.FoldingCell;
@@ -27,14 +32,19 @@ import butterknife.ButterKnife;
 class TrainingsAdapter extends RecyclerView.Adapter<TrainingsAdapter.ViewHolder> {
 
     private List<Training> trainingListForCurrentDay;
-
+    private  Boolean flag;
     private SpeakerClickListener speakerClickListener;
     private Utils utils;
     private int dayOfWeek;
-    private Context context;
+    private Activity context;
+    private SharedPreferences sharedPreferences;
+    private final String ACCOUNT_PREFERENCES="accountPreferences";
+    private final static  String USER_ID="userID";
+    private String userID;
 
 
     void updateList( int dayOfWeek) {
+        userID=sharedPreferences.getString(USER_ID,"");
 
         this.dayOfWeek=dayOfWeek;
         this.trainingListForCurrentDay = utils.getCurrentDayTrainings( dayOfWeek);
@@ -55,6 +65,9 @@ class TrainingsAdapter extends RecyclerView.Adapter<TrainingsAdapter.ViewHolder>
 
         @BindView(R.id.foldTrainingTime)
         TextView foldTrainingTime;
+
+        @BindView(R.id.star)
+        ImageView starImage;
 
         @BindView(R.id.foldSpeakerImage)
         ImageView foldSpeakerImage;
@@ -100,11 +113,16 @@ class TrainingsAdapter extends RecyclerView.Adapter<TrainingsAdapter.ViewHolder>
         }
     }
 
-    TrainingsAdapter(Context context) {
+    TrainingsAdapter(Activity context) {
         this.context=context;
         LocalDatabase.getInstance().readFromDB();
         trainingListForCurrentDay = new ArrayList<>();
         utils = new Utils();
+
+        sharedPreferences= context.getSharedPreferences(ACCOUNT_PREFERENCES,Context.MODE_PRIVATE);
+        userID=sharedPreferences.getString(USER_ID,"");
+
+
     }
 
     @Override
@@ -121,7 +139,7 @@ class TrainingsAdapter extends RecyclerView.Adapter<TrainingsAdapter.ViewHolder>
         bindUnfoldView(holder, item);
     }
 
-    private void bindFoldView(ViewHolder holder, Training item) {
+    private void bindFoldView(final ViewHolder holder, final Training item) {
 
         Picasso.with(context)
                 .load(utils.getSpeakerImage(item.getSpeakerId()))
@@ -132,6 +150,42 @@ class TrainingsAdapter extends RecyclerView.Adapter<TrainingsAdapter.ViewHolder>
         holder.foldShortDescription.setText(item.getStream());
         holder.foldTrainingTime.setText(item.getTimeStart());
         holder.foldTrainingSpeaker.setText(utils.getSpeakerName(item.getSpeakerId()));
+
+        if(!userID.equals("")) {
+            if (utils.userHasCurrentTraining(userID, item)) {
+                holder.starImage.setImageResource(R.drawable.ic_fill_star);
+            }
+
+        }
+
+        holder.starImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(userID.equals("")){
+                   context.startActivity(new Intent(context, SignInActivity.class));
+                    return;
+                }
+
+                if(!userID.equals("")) {
+                    flag=utils.userHasCurrentTraining(userID, item);
+                    flag=!flag;
+
+                    if(flag) {
+                        utils.addTrainingToUser(userID,item);
+                        holder.starImage.setImageResource(R.drawable.ic_fill_star);
+                        Toast.makeText(context, "Training has added to your list", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        utils.removeTrainingToUser(userID,item);
+                        holder.starImage.setImageResource(R.drawable.ic_star);
+                        Toast.makeText(context, "Training has removed from your list", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+
+            }
+        });
     }
 
 

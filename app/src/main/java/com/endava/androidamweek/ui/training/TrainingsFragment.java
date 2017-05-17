@@ -29,7 +29,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class TrainingsFragment extends Fragment implements  SpeakerClickListener  {
+public class TrainingsFragment extends Fragment implements SpeakerClickListener {
 
     public static final String SPEAKER = "speaker";
     public static final String TRAINING_LIST = "trainingList";
@@ -41,7 +41,7 @@ public class TrainingsFragment extends Fragment implements  SpeakerClickListener
     private final static String DAY_OF_WEEK = "dayOfWeek";
     private List<Speaker> speakers;
     private List<Training> trainings;
-    private  int dayOfWeek;
+    private int dayOfWeek;
     private Bundle bundle;
 
     @Nullable
@@ -53,29 +53,15 @@ public class TrainingsFragment extends Fragment implements  SpeakerClickListener
 
         LocalDatabase.getInstance().setContext(getContext());
 
-         bundle = getArguments();
-        dayOfWeek=bundle.getInt(DAY_OF_WEEK);
-
-
+        bundle = getArguments();
+        dayOfWeek = bundle.getInt(DAY_OF_WEEK);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
 
-        adapter = new TrainingsAdapter(getActivity().getBaseContext());
-
-        adapter.setOnSpeakerClickListener(this);
-
-
-        if (!isDatabaseNull())
-        adapter.updateList(dayOfWeek);
-
-        recyclerView.setAdapter(adapter);
-
         return view;
     }
-
-
 
     @Override
     public void onSpeakerClick(Speaker speaker, List<Training> trainings) {
@@ -84,7 +70,6 @@ public class TrainingsFragment extends Fragment implements  SpeakerClickListener
         intent.putExtra(TRAINING_LIST, (Serializable) trainings);
         startActivity(intent);
     }
-
 
 
     @Override
@@ -101,9 +86,19 @@ public class TrainingsFragment extends Fragment implements  SpeakerClickListener
         }
     };
 
+
     @Override
     public void onResume() {
         super.onResume();
+
+        adapter = new TrainingsAdapter(getActivity());
+
+        adapter.setOnSpeakerClickListener(this);
+
+        if (!isDatabaseNull())
+            adapter.updateList(dayOfWeek);
+
+        recyclerView.setAdapter(adapter);
 
         LocalBroadcastManager.getInstance(getContext()).registerReceiver(mMessageReceiver, new IntentFilter("UpdateData"));
     }
@@ -111,7 +106,6 @@ public class TrainingsFragment extends Fragment implements  SpeakerClickListener
     public boolean isDatabaseNull() {
         return (LocalDatabase.getInstance().getSpeakers() == null || LocalDatabase.getInstance().getTrainings() == null
                 || LocalDatabase.getInstance().getUsers() == null || LocalDatabase.getInstance().getQuizzes() == null);
-
     }
 
 

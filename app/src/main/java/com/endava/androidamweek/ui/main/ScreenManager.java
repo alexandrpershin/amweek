@@ -28,7 +28,7 @@ class ScreenManager {
     }
 
     public void replaceFragment(Fragment fragment, int dayOfWeek) {
-        Bundle bundle= new Bundle();
+        Bundle bundle = new Bundle();
         bundle.putInt(DAY_OF_WEEK, dayOfWeek);
         fragment.setArguments(bundle);
 

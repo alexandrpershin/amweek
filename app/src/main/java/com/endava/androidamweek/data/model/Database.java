@@ -25,9 +25,6 @@ public class Database {
     private ArrayList<User> users;
     private ArrayList<Quizz> quizzes;
 
-    private static Boolean connected;
-    private static DatabaseReference connectedRef;
-
 
     private Database() {
         databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -47,11 +44,13 @@ public class Database {
     }
 
     private void getDataFromFirebase() {
+
         getTrainingsFromFirebase();
         getSpeakersFromFirebase();
         getUsersFromFirebase();
         getQuizzesFromFirebase();
     }
+
 
     public void getTrainingsFromFirebase() {
         getTrainingsReferece().addValueEventListener(new ValueEventListener() {
@@ -107,9 +106,11 @@ public class Database {
 
                     for (DataSnapshot dataTrainings : data.child("training").getChildren()) {
                         UserTraining speakerTrainings = dataTrainings.getValue(UserTraining.class);
+                        speakerTrainings.setFirebaseFieldName(dataTrainings.getKey());
                         trainingslist.add(speakerTrainings);
                     }
-                    user.setTraining(trainingslist);
+                    user.setTrainings(trainingslist);
+                    user.setFirebaseFieldName(data.getKey());
                     map.put(data.getKey(), user);
                     trainingslist = new ArrayList<>();
                 }

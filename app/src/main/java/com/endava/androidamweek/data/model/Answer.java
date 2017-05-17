@@ -15,9 +15,8 @@ public class Answer implements Serializable {
     private String date;
     @DatabaseField
     private String userId;
-    @DatabaseField (foreign = true, foreignAutoRefresh = true, foreignAutoCreate = true)
+    @DatabaseField(foreign = true, foreignAutoRefresh = true, foreignAutoCreate = true)
     private Quizz quizz;
-
 
 
     public String getAnswer() {

@@ -41,9 +41,8 @@ public class LocalDatabase {
     }
 
     public void updataData() {
-
-        writeQuizzesToDB();
         writeSpeakersToDB();
+        writeQuizzesToDB();
         writeTrainingsToDB();
         writeUsersToDB();
 
@@ -90,8 +89,10 @@ public class LocalDatabase {
     }
 
     private void writeQuizzesToDB() {
+
         databaseHelper.clearQuizzesTable();
         databaseHelper.clearAnswersTable();
+
         try {
             for (int i = 0; i < Database.getInstance().getQuizzes().size(); i++)
                 quizzDao.create(Database.getInstance().getQuizzes().get(i));

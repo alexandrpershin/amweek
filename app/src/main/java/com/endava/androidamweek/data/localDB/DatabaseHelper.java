@@ -1,7 +1,5 @@
 package com.endava.androidamweek.data.localDB;
 
-import java.sql.SQLException;
-
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -17,12 +15,14 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
+import java.sql.SQLException;
+
 
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
 
     private static final String DATABASE_NAME = "AMWeekDB.db";
-    private static final int DATABASE_VERSION = 29;
+    private static final int DATABASE_VERSION = 34;
 
     private Dao<User, Integer> userDao;
     private Dao<UserTraining, Integer> userTrainingDao;
@@ -36,50 +36,50 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    public void clearTrainingsTable(){
+    public void clearTrainingsTable() {
         try {
-            TableUtils.clearTable(connectionSource,Training.class);
+            TableUtils.clearTable(connectionSource, Training.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void clearAnswersTable(){
+    public void clearAnswersTable() {
         try {
-            TableUtils.clearTable(connectionSource,Answer.class);
+            TableUtils.clearTable(connectionSource, Answer.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void clearQuizzesTable(){
+    public void clearQuizzesTable() {
         try {
-            TableUtils.clearTable(connectionSource,Quizz.class);
+            TableUtils.clearTable(connectionSource, Quizz.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void clearUsersTable(){
+    public void clearUsersTable() {
         try {
-            TableUtils.clearTable(connectionSource,User.class);
+            TableUtils.clearTable(connectionSource, User.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void clearUserTrainingTable(){
+    public void clearUserTrainingTable() {
         try {
-            TableUtils.clearTable(connectionSource,UserTraining.class);
+            TableUtils.clearTable(connectionSource, UserTraining.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
 
-    public void clearSpeakersTable(){
+    public void clearSpeakersTable() {
         try {
-            TableUtils.clearTable(connectionSource,Speaker.class);
+            TableUtils.clearTable(connectionSource, Speaker.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }

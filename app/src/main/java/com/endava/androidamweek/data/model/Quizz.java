@@ -8,8 +8,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 @DatabaseTable
-public class Quizz  implements Serializable{
-    @DatabaseField (generatedId = true)
+public class Quizz implements Serializable {
+    @DatabaseField(generatedId = true)
     private Integer quizzId;
 
     @DatabaseField
@@ -31,7 +31,7 @@ public class Quizz  implements Serializable{
     @DatabaseField
     private String firebaseFieldName;
 
-    @DatabaseField(dataType= DataType.SERIALIZABLE)
+    @DatabaseField(dataType = DataType.SERIALIZABLE)
     private ArrayList<Answer> userAnswers;
 
     public String getDate() {
