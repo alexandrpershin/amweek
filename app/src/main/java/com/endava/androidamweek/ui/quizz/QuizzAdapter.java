@@ -12,6 +12,10 @@ import com.endava.androidamweek.data.callbacks.QuizzCallback;
 import com.endava.androidamweek.data.model.Quizz;
 import com.endava.androidamweek.utils.Utils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -28,7 +32,6 @@ class QuizzAdapter extends RecyclerView.Adapter<QuizzAdapter.ViewHolder> {
         notifyDataSetChanged();
     }
 
-
     class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.quizz_time)
@@ -40,8 +43,8 @@ class QuizzAdapter extends RecyclerView.Adapter<QuizzAdapter.ViewHolder> {
         @BindView(R.id.winner)
         TextView quizzWinner;
 
-        @BindView(R.id.quizz_image)
-        ImageView quizzImage;
+        @BindView(R.id.quizzStatus)
+        ImageView quizzStatus;
 
         @BindView(R.id.quizz_title)
         TextView quizzTitle;
@@ -68,7 +71,9 @@ class QuizzAdapter extends RecyclerView.Adapter<QuizzAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(QuizzAdapter.ViewHolder holder, int position) {
+
         final Quizz item = quizzList.get(position);
+
         holder.quizzTitle.setText(item.getTitle());
         holder.quizzWinner.setText(item.getWinner());
         holder.quizzTime.setText(item.getTime());
@@ -80,6 +85,41 @@ class QuizzAdapter extends RecyclerView.Adapter<QuizzAdapter.ViewHolder> {
             }
         });
 
+        boolean isActive = false;
+        try {
+            isActive = isQuizzActive(item);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        if (isActive) {
+            holder.quizzStatus.setImageResource(R.drawable.ic_no);
+
+        } else {
+            holder.quizzStatus.setImageResource(R.drawable.ic_bell);
+        }
+
+    }
+
+    private boolean isQuizzActive(Quizz item) throws ParseException {
+
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+
+        Date currentDate = dateFormat.parse(calendar.getTime().toString());
+        Date quizzDate = dateFormat.parse(item.getDate());
+
+        long mills = quizzDate.getTime() - currentDate.getTime();
+
+        boolean isQuizzActive;
+
+        if (mills >= 0) {
+            isQuizzActive = true;
+        } else {
+            isQuizzActive = false;
+        }
+
+        return isQuizzActive;
     }
 
     @Override

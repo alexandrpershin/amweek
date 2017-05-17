@@ -18,10 +18,12 @@
         android:id="@+id/codeview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="visible"
-        android:isScrollContainer="true"
+        android:layout_above="@+id/answer_box"
         android:layout_below="@+id/question_box"
-        android:layout_alignParentStart="true">
+        android:layout_marginBottom="@dimen/medium_spacing"
+        android:visibility="visible"
+        android:layout_marginTop="@dimen/medium_spacing"
+        android:isScrollContainer="true">
 
     </io.github.kbiakov.codeview.CodeView>
 
@@ -35,7 +37,7 @@
         android:layout_marginBottom="@dimen/medium_spacing"
         android:background="@color/colorGreyMedium"
         android:hint="@string/quizz_answer_hint"
-        android:padding="14dp"
+        android:padding="@dimen/max_spacing"
         android:scrollbars="vertical" />
 
     <Button

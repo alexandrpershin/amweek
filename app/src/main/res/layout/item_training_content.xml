@@ -67,7 +67,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/medium_spacing"
-                        android:text="March 5, 2017"
                         android:textColor="@color/color_grey_dark"
                         android:textSize="@dimen/subheading_text_size" />
                 </LinearLayout>
@@ -98,7 +97,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/medium_spacing"
-                        android:text="20:12 (Duration: 45)"
                         android:textColor="@color/color_grey_dark"
                         android:textSize="@dimen/subheading_text_size" />
                 </LinearLayout>
@@ -136,7 +134,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="@dimen/medium_spacing"
-                        android:text="NBC"
                         android:textColor="@color/color_grey_dark"
                         android:textSize="@dimen/subheading_text_size" />
 
