@@ -16,6 +16,7 @@ allprojects {
     repositories {
         jcenter()
         maven { url "https://jitpack.io" }
+        maven { url "http://dl.bintray.com/glomadrian/maven" }
     }
 }
 
@@ -32,8 +33,8 @@ ext {
     butterknifeVersion = '8.5.1'
     foldingcellVersion = '1.1.0'
     roundImageviewVersion = '2.1.0'
-    codeView = '1.2.0'
-    playServicesAuthVersion = '10.0.1'
+    codeViewVersion = '1.2.0'
+    playServicesVersion = '10.0.1'
     firebaseStorageVersion='0.6.0'
     picassoVersion='2.5.2'
     ormliteVersion='4.46'

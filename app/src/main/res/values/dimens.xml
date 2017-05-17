@@ -3,12 +3,24 @@
     <dimen name="title_text_size">20sp</dimen>
     <dimen name="body_text_size">14sp</dimen>
     <dimen name="subheading_text_size">16sp</dimen>
+
+    <dimen name="title_text_size_large">24sp</dimen>
+    <dimen name="body_text_size_large">18sp</dimen>
+    <dimen name="subheading_text_size_large">20sp</dimen>
+
     <dimen name="max_spacing">15dp</dimen>
+    <dimen name="max_spacing_large">20dp</dimen>
     <dimen name="profile_image_spacing">30dp</dimen>
     <dimen name="medium_spacing">10dp</dimen>
     <dimen name="min_spacing">5dp</dimen>
     <dimen name="line_width">1dp</dimen>
     <dimen name="image_size">90dp</dimen>
+    <dimen name="image_size_large">90dp</dimen>
+    <dimen name="bottombar_height">65dp</dimen>
+    <dimen name="splash_text">60sp</dimen>
+    <dimen name="status_icon_size">50sp</dimen>
+    <dimen name="status_icon_size_large">55sp</dimen>
+
 
     <dimen name="line_text_size" tools:override="true">15sp</dimen>
     <dimen name="line_height" tools:override="true">27dp</dimen>-->

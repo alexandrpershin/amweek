@@ -7,8 +7,26 @@
     android:orientation="horizontal">
 
     <RelativeLayout
+        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:layout_weight="0.1"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/speaker_training_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/title_text_size"
+            android:layout_alignParentTop="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="@dimen/max_spacing"
         android:layout_weight="1"
         android:background="@color/color_accent">
@@ -17,9 +35,9 @@
             android:id="@+id/speaker_training_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/max_spacing"
             android:ellipsize="end"
-            android:maxLines="1"
-            android:text="AM Week dgkjfk fgkjfk gfkgjfk gfkgj"
+            android:maxLines="2"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/subheading_text_size"
             android:textStyle="bold" />
@@ -29,8 +47,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/speaker_training_title"
+            android:layout_marginLeft="@dimen/max_spacing"
             android:layout_marginTop="@dimen/min_spacing"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <ImageView
@@ -46,25 +65,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/min_spacing"
-                android:text="Stream"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/body_text_size" />
-
-            <ImageView
-                android:id="@+id/time_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/max_spacing"
-                android:layout_marginStart="@dimen/medium_spacing"
-                android:adjustViewBounds="true"
-                android:src="@drawable/ic_clock" />
-
-            <TextView
-                android:id="@+id/speaker_training_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="@dimen/min_spacing"
-                android:text="14:54"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/body_text_size" />
 
@@ -78,13 +78,10 @@
 
             <TextView
                 android:id="@+id/speaker_training_date"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/min_spacing"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text="25.01.2014"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/body_text_size" />
 
@@ -97,7 +94,6 @@
             android:layout_marginTop="@dimen/max_spacing"
             android:src="@color/colorGreyMedium"
             android:visibility="visible" />
-
     </RelativeLayout>
 
 </LinearLayout>
