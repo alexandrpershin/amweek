@@ -13,7 +13,6 @@
         android:layout_height="110dp"
         android:background="@color/color_accent"
         android:baselineAligned="false"
-        android:clickable="true"
         android:orientation="horizontal">
 
         <RelativeLayout

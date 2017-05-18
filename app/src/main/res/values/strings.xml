@@ -42,5 +42,5 @@
         }</string>
     <string name="quizz_answer_hint">Enter your answer here</string>
     <string name="btn_submit">Submit</string>
-    <string name="str_winner">The winner is</string>
+    <string name="str_winner">The winner is </string>
 </resources>

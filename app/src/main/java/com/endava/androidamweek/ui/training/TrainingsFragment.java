@@ -14,7 +14,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.endava.androidamweek.R;
 import com.endava.androidamweek.data.localDB.LocalDatabase;
@@ -39,9 +38,11 @@ public class TrainingsFragment extends Fragment implements SpeakerClickListener 
 
     TrainingsAdapter adapter;
     private final static String DAY_OF_WEEK = "dayOfWeek";
+    private static final String ADAPTER_POSITION = "adapterPosition";
     private List<Speaker> speakers;
     private List<Training> trainings;
     private int dayOfWeek;
+    private int adapterPosition;
     private Bundle bundle;
 
     @Nullable
@@ -55,6 +56,7 @@ public class TrainingsFragment extends Fragment implements SpeakerClickListener 
 
         bundle = getArguments();
         dayOfWeek = bundle.getInt(DAY_OF_WEEK);
+        adapterPosition = bundle.getInt(ADAPTER_POSITION);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -81,7 +83,6 @@ public class TrainingsFragment extends Fragment implements SpeakerClickListener 
     private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Toast.makeText(context, "Data has updated", Toast.LENGTH_SHORT).show();
             adapter.updateList(dayOfWeek);
         }
     };
@@ -91,7 +92,7 @@ public class TrainingsFragment extends Fragment implements SpeakerClickListener 
     public void onResume() {
         super.onResume();
 
-        adapter = new TrainingsAdapter(getActivity());
+        adapter = new TrainingsAdapter(getActivity(), adapterPosition);
 
         adapter.setOnSpeakerClickListener(this);
 

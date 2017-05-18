@@ -10,6 +10,7 @@ import com.endava.androidamweek.R;
 class ScreenManager {
 
     private final static String DAY_OF_WEEK = "dayOfWeek";
+    private static final String ADAPTER_POSITION = "adapterPosition";
     private static ScreenManager instance;
     private Activity context;
 
@@ -27,9 +28,10 @@ class ScreenManager {
         this.context = (Activity) context;
     }
 
-    public void replaceFragment(Fragment fragment, int dayOfWeek) {
+    public void replaceFragment(Fragment fragment, int dayOfWeek, int adapterPosition) {
         Bundle bundle = new Bundle();
         bundle.putInt(DAY_OF_WEEK, dayOfWeek);
+        bundle.putInt(ADAPTER_POSITION,adapterPosition);
         fragment.setArguments(bundle);
 
         context.getFragmentManager().beginTransaction()

@@ -8,12 +8,12 @@ import android.os.IBinder;
 import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 
 import com.endava.androidamweek.R;
 import com.endava.androidamweek.data.localDB.LocalDatabase;
 import com.endava.androidamweek.data.model.Database;
 import com.endava.androidamweek.ui.quizz.QuizzActivity;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -27,6 +27,7 @@ public class UpdateDataService extends Service {
     private Notify notify;
     private Boolean isFirsTimeRunning;
     private Boolean stop;
+    private int childrenCount;
 
     public boolean isDatabaseNull() {
         return (Database.getInstance().getSpeakers() == null || Database.getInstance().getTrainings() == null
@@ -41,14 +42,18 @@ public class UpdateDataService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        isFirsTimeRunning = true;
+        childrenCount = LocalDatabase.getInstance().getQuizzes().size();
         executorService.execute(notify);
-        return Service.START_STICKY;
+        Log.i("UpdateDataService", "onStartCommand");
+        return Service.START_NOT_STICKY;
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         stop = true;
+        Log.i("UpdateDataService", "onDestroy");
     }
 
 
@@ -60,6 +65,7 @@ public class UpdateDataService extends Service {
         executorService = Executors.newFixedThreadPool(1);
         isFirsTimeRunning = true;
         stop = false;
+        Log.i("UpdateDataService", "onCreate");
     }
 
     private void sendMessage() {
@@ -67,6 +73,8 @@ public class UpdateDataService extends Service {
         }
 
         LocalDatabase.getInstance().updataData();
+
+        childrenCount = LocalDatabase.getInstance().getQuizzes().size();
 
         Intent intent = new Intent("UpdateData");
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
@@ -81,47 +89,39 @@ public class UpdateDataService extends Service {
         public void run() {
             databaseValueEventListener();
             quizzChildEventListener();
+            Log.i("UpdateDataService", "run");
         }
     }
 
     private void quizzChildEventListener() {
-        Database.getInstance().getQuizzesReferece().addChildEventListener(new ChildEventListener() {
+        Database.getInstance().getQuizzesReferece().addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 if (!isFirsTimeRunning) {
-                    Intent intent = new Intent(getApplicationContext(), QuizzActivity.class);
-                    intent.setFlags(Intent.FLAG_FROM_BACKGROUND);
+                    if (dataSnapshot.getChildrenCount() > childrenCount) {
+                        Intent intent = new Intent(getApplicationContext(), QuizzActivity.class);
+                        intent.setFlags(Intent.FLAG_FROM_BACKGROUND);
 
-                    PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-                    NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext())
-                            .setContentIntent(pendingIntent)
-                            .setSmallIcon(R.drawable.ic_fill_star)
-                            .setAutoCancel(true)
-                            .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
-                            .setVibrate(new long[]{1000, 1000})
-                            .setContentTitle("New quizz!");
-                    NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-                    notificationManager.notify(1, builder.build());
+                        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext())
+                                .setContentIntent(pendingIntent)
+                                .setSmallIcon(R.drawable.ic_fill_star)
+                                .setAutoCancel(true)
+                                .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
+                                .setVibrate(new long[]{1000, 1000})
+                                .setContentTitle("New quizz!");
+                        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                        notificationManager.notify(1, builder.build());
 
-                    sendMessage();
+                        sendMessage();
+                    }
                 }
             }
 
             @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-            }
-
-            @Override
             public void onCancelled(DatabaseError databaseError) {
+
             }
         });
     }
@@ -131,7 +131,10 @@ public class UpdateDataService extends Service {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (!stop) {
+                    Log.i("UpdateDataService", " databaseValueEventListener sendMessage");
+
                     sendMessage();
+
                 }
             }
 

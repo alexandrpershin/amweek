@@ -1,5 +1,7 @@
 package com.endava.androidamweek.data.mail;
 
+import android.util.Log;
+
 import java.security.Security;
 import java.util.Properties;
 
@@ -81,6 +83,7 @@ public class MailSenderClass extends javax.mail.Authenticator {
             message.setContent(_multipart);
 
             Transport.send(message);
+            Log.i("QuizzContetn","message has sended");
         } catch (Exception e) {
             e.printStackTrace();
 

@@ -26,6 +26,7 @@ class QuizzAdapter extends RecyclerView.Adapter<QuizzAdapter.ViewHolder> {
     private final QuizzCallback quizzCallback;
     private List<Quizz> quizzList;
     private Utils utils;
+    private boolean isActive;
 
     public void updateList() {
         this.quizzList = utils.getQuizzes();
@@ -85,42 +86,18 @@ class QuizzAdapter extends RecyclerView.Adapter<QuizzAdapter.ViewHolder> {
             }
         });
 
-        boolean isActive = false;
-        try {
-            isActive = isQuizzActive(item);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+            isActive = item.getStatus();
 
         if (isActive) {
-            holder.quizzStatus.setImageResource(R.drawable.ic_no);
-
-        } else {
             holder.quizzStatus.setImageResource(R.drawable.ic_bell);
-        }
 
-    }
-
-    private boolean isQuizzActive(Quizz item) throws ParseException {
-
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-
-        Date currentDate = dateFormat.parse(calendar.getTime().toString());
-        Date quizzDate = dateFormat.parse(item.getDate());
-
-        long mills = quizzDate.getTime() - currentDate.getTime();
-
-        boolean isQuizzActive;
-
-        if (mills >= 0) {
-            isQuizzActive = true;
         } else {
-            isQuizzActive = false;
+            holder.quizzStatus.setImageResource(R.drawable.ic_no);
         }
 
-        return isQuizzActive;
     }
+
+
 
     @Override
     public int getItemCount() {
