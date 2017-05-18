@@ -12,6 +12,10 @@ import com.endava.androidamweek.data.callbacks.QuizzCallback;
 import com.endava.androidamweek.data.model.Quizz;
 import com.endava.androidamweek.utils.Utils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -22,12 +26,12 @@ class QuizzAdapter extends RecyclerView.Adapter<QuizzAdapter.ViewHolder> {
     private final QuizzCallback quizzCallback;
     private List<Quizz> quizzList;
     private Utils utils;
+    private boolean isActive;
 
     public void updateList() {
         this.quizzList = utils.getQuizzes();
         notifyDataSetChanged();
     }
-
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -40,8 +44,8 @@ class QuizzAdapter extends RecyclerView.Adapter<QuizzAdapter.ViewHolder> {
         @BindView(R.id.winner)
         TextView quizzWinner;
 
-        @BindView(R.id.quizz_image)
-        ImageView quizzImage;
+        @BindView(R.id.quizzStatus)
+        ImageView quizzStatus;
 
         @BindView(R.id.quizz_title)
         TextView quizzTitle;
@@ -68,7 +72,9 @@ class QuizzAdapter extends RecyclerView.Adapter<QuizzAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(QuizzAdapter.ViewHolder holder, int position) {
+
         final Quizz item = quizzList.get(position);
+
         holder.quizzTitle.setText(item.getTitle());
         holder.quizzWinner.setText(item.getWinner());
         holder.quizzTime.setText(item.getTime());
@@ -80,7 +86,18 @@ class QuizzAdapter extends RecyclerView.Adapter<QuizzAdapter.ViewHolder> {
             }
         });
 
+            isActive = item.getStatus();
+
+        if (isActive) {
+            holder.quizzStatus.setImageResource(R.drawable.ic_bell);
+
+        } else {
+            holder.quizzStatus.setImageResource(R.drawable.ic_no);
+        }
+
     }
+
+
 
     @Override
     public int getItemCount() {

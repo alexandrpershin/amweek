@@ -73,7 +73,7 @@
                     android:src="@color/colorGreyLight" />
 
                 <TextView
-                    android:id="@+id/speakerDescription"
+                    android:id="@+id/speaker_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/medium_spacing" />
@@ -94,7 +94,7 @@
                     android:src="@color/colorGreyLight" />
 
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/speakerTrainings"
+                    android:id="@+id/speaker_trainings"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="true"

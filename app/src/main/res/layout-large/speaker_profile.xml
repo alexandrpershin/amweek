@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_accent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/profile_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_grey_dark"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/profile_image_spacing"
+                android:paddingTop="@dimen/profile_image_spacing">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/speaker_photo"
+                    android:layout_width="300dp"
+                    android:layout_height="300dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/user6"
+                    app:civ_border_color="@color/colorPrimary"
+                    app:civ_border_width="@dimen/line_width" />
+
+                <TextView
+                    android:id="@+id/speaker_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="@color/color_accent"
+                    android:textSize="@dimen/title_text_size_large" />
+
+                <TextView
+                    android:id="@+id/speaker_short_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/subheading_text_size_large"
+                    android:textColor="@color/color_accent" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/profile_header"
+                android:background="@color/color_accent"
+                android:orientation="vertical"
+                android:padding="@dimen/medium_spacing">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/max_spacing"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="@string/about_speaker"
+                    android:textSize="@dimen/subheading_text_size_large"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_width"
+                    android:layout_marginTop="@dimen/min_spacing"
+                    android:src="@color/colorGreyLight" />
+
+                <TextView
+                    android:id="@+id/speaker_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/body_text_size_large"
+                    android:layout_marginTop="@dimen/medium_spacing" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/max_spacing"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="@string/trainings"
+                    android:textSize="@dimen/subheading_text_size_large"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_width"
+                    android:layout_marginTop="@dimen/min_spacing"
+                    android:src="@color/colorGreyLight" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/speaker_trainings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:scrollbars="vertical" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

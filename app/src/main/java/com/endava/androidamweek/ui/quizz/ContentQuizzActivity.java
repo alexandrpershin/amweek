@@ -78,7 +78,14 @@ public class ContentQuizzActivity extends BaseActivity implements View.OnClickLi
 
         quizz = (Quizz) getIntent().getSerializableExtra(QuizzActivity.QUIZZ);
 
+        if (quizz.getCodeSnippet().equals("")){
+            codeView.setVisibility(View.GONE);
+        }
+
+        questionBox.setText(quizz.getConditions());
         codeView.setCode(quizz.getCodeSnippet(), "java");
+
+
 
         sharedPreferences = getSharedPreferences(ACCOUNT_PREFERENCES, MODE_PRIVATE);
         userId = sharedPreferences.getString(USER_ID, "");
@@ -114,6 +121,7 @@ public class ContentQuizzActivity extends BaseActivity implements View.OnClickLi
             sendEmail();
             answerBox.setText("");
 
+            Log.i("QuizzContetn","finished with finish()");
             finish();
         }
     }
@@ -167,7 +175,7 @@ public class ContentQuizzActivity extends BaseActivity implements View.OnClickLi
         answer.setTime(timeString);
 
         newAnswer.setValue(answer);
-
+        Log.i("QuizzContetn","answer has sent");
         Toast.makeText(this, "Your answer has sent successfully", Toast.LENGTH_SHORT).show();
     }
 

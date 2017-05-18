@@ -29,6 +29,10 @@ dependencies {
     // Firebase
     compile 'com.google.firebase:firebase-database:' + rootProject.ext.firebaseVersion
     testCompile 'junit:junit:' + rootProject.ext.testCompileVersion
+    compile 'com.google.firebase:firebase-core:' + rootProject.ext.firebaseVersion
+    compile 'com.google.firebase:firebase-messaging:' + rootProject.ext.firebaseVersion
+    compile 'com.firebaseui:firebase-ui-storage:' + rootProject.ext.firebaseStorageVersion
+    compile 'com.google.firebase:firebase-auth:' + rootProject.ext.firebaseVersion
     // Bottom Bar
     compile 'com.android.support:design:' + rootProject.ext.supportLibraryVersion
     compile 'com.roughike:bottom-bar:' + rootProject.ext.bottombarVersion
@@ -39,18 +43,19 @@ dependencies {
     compile 'com.ramotion.foldingcell:folding-cell:' + rootProject.ext.foldingcellVersion
     // Circle ImageView
     compile 'de.hdodenhof:circleimageview:' + rootProject.ext.roundImageviewVersion
-    compile 'com.google.firebase:firebase-auth:' + rootProject.ext.firebaseVersion
-    compile 'com.google.android.gms:play-services-auth:' + rootProject.ext.playServicesAuthVersion
-    compile 'com.firebaseui:firebase-ui-storage:' + rootProject.ext.firebaseStorageVersion
+    // Play Sevices
+    compile 'com.google.android.gms:play-services-auth:' + rootProject.ext.playServicesVersion
+    // Picasso
     compile 'com.squareup.picasso:picasso:' + rootProject.ext.picassoVersion
     // CodeView
-    compile 'com.github.softwee:codeview-android:' + rootProject.ext.codeView
+    compile 'com.github.softwee:codeview-android:' + rootProject.ext.codeViewVersion
+    // Shimmer
+    compile 'com.facebook.shimmer:shimmer:0.1.0@aar'
+    // Ormlite
     compile 'com.j256.ormlite:ormlite-android:' + rootProject.ext.ormliteVersion
-
+    // Mail
+    compile files('libs/lib_mail.jar')
     compile files('libs/activation.jar')
-    compile files('lib_mail.jar')
     compile files('libs/additionnal.jar')
-
-
 }
 apply plugin: 'com.google.gms.google-services'

@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="@dimen/min_spacing"
-        android:layout_weight="3"
+        android:layout_weight="2"
         android:background="@color/color_accent"
         android:gravity="center"
         android:padding="@dimen/min_spacing">
@@ -41,7 +41,6 @@
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:maxLines="2"
-            android:text="AM Culture and Soft skills"
             android:textColor="@color/color_grey_dark"
             android:textSize="@dimen/body_text_size" />
 
@@ -53,7 +52,6 @@
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:maxLines="3"
-            android:text="What applications do when they gin a business ecosystem?"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/subheading_text_size"
             android:textStyle="bold" />
@@ -77,7 +75,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/min_spacing"
-                android:text="12:21"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/body_text_size" />
 
@@ -96,7 +93,6 @@
                 android:layout_marginStart="@dimen/min_spacing"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="Orlando Alexandrescu"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/body_text_size" />
 
@@ -109,16 +105,17 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:background="@color/color_accent"
-        android:clickable="true"
         android:gravity="center_horizontal"
         android:padding="@dimen/min_spacing">
 
         <ImageView
             android:id="@+id/star"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:clickable="true"
             android:layout_centerVertical="true"
             android:adjustViewBounds="true"
+            android:tag="ic_star"
             android:src="@drawable/ic_star" />
 
     </RelativeLayout>

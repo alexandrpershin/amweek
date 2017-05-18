@@ -6,7 +6,9 @@ import android.support.annotation.IdRes;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.endava.androidamweek.R;
 import com.endava.androidamweek.ui.quizz.QuizzActivity;
@@ -34,10 +36,13 @@ public class ScheduleActivity extends BaseActivity implements OnTabSelectListene
     CoordinatorLayout view;
 
     private Intent intent;
+    private int adapterPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        adapterPosition = getIntent().getIntExtra("adapterPosition", 0);
 
         intent = new Intent(getApplicationContext(), UpdateDataService.class);
         startService(intent);
@@ -58,6 +63,8 @@ public class ScheduleActivity extends BaseActivity implements OnTabSelectListene
             }
         });
         setCurrentDay();
+
+        Log.i("ScheduleActivity", "created");
     }
 
 
@@ -90,19 +97,19 @@ public class ScheduleActivity extends BaseActivity implements OnTabSelectListene
     public void onTabSelected(@IdRes int tabId) {
         switch (tabId) {
             case R.id.monday:
-                ScreenManager.getInstance().replaceFragment(new TrainingsFragment(), 1);
+                ScreenManager.getInstance().replaceFragment(new TrainingsFragment(), 1,adapterPosition);
                 break;
             case R.id.tuesday:
-                ScreenManager.getInstance().replaceFragment(new TrainingsFragment(), 2);
+                ScreenManager.getInstance().replaceFragment(new TrainingsFragment(), 2,adapterPosition);
                 break;
             case R.id.wednesday:
-                ScreenManager.getInstance().replaceFragment(new TrainingsFragment(), 3);
+                ScreenManager.getInstance().replaceFragment(new TrainingsFragment(), 3,adapterPosition);
                 break;
             case R.id.thursday:
-                ScreenManager.getInstance().replaceFragment(new TrainingsFragment(), 4);
+                ScreenManager.getInstance().replaceFragment(new TrainingsFragment(), 4,adapterPosition);
                 break;
             case R.id.friday:
-                ScreenManager.getInstance().replaceFragment(new TrainingsFragment(), 5);
+                ScreenManager.getInstance().replaceFragment(new TrainingsFragment(), 5,adapterPosition);
                 break;
             default:
                 break;
@@ -113,6 +120,19 @@ public class ScheduleActivity extends BaseActivity implements OnTabSelectListene
     protected void onDestroy() {
         super.onDestroy();
         stopService(intent);
+        Log.i("ScheduleActivity", "Destoyed");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i("ScheduleActivity", "onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i("ScheduleActivity", "onPause");
     }
 }
 

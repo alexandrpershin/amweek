@@ -45,10 +45,10 @@ public class Database {
 
     private void getDataFromFirebase() {
 
+        getQuizzesFromFirebase();
         getTrainingsFromFirebase();
         getSpeakersFromFirebase();
         getUsersFromFirebase();
-        getQuizzesFromFirebase();
     }
 
 

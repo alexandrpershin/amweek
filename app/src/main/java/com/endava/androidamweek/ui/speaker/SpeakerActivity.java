@@ -33,13 +33,13 @@ public class SpeakerActivity extends BaseActivity {
     @BindView(R.id.speaker_short_info)
     TextView speakerShortInfo;
 
-    @BindView(R.id.speakerDescription)
+    @BindView(R.id.speaker_description)
     TextView speakerDescription;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    @BindView(R.id.speakerTrainings)
+    @BindView(R.id.speaker_trainings)
     RecyclerView speakerTrainings;
 
     SpeakerTrainingsAdapter adapter;
