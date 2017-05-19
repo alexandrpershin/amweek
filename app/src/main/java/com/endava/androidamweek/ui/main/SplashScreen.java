@@ -15,7 +15,7 @@ import butterknife.ButterKnife;
 
 public class SplashScreen extends Activity {
 
-    private static int SPLASH_TIME_OUT = 1000;
+    private static int SPLASH_TIME_OUT = 5000;
 
     @BindView(R.id.shimmer_view_container)
     ShimmerFrameLayout container;

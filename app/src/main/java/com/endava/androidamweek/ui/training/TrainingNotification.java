@@ -25,7 +25,6 @@ public class TrainingNotification {
     private Context context;
     private AlarmManager alarmManager;
     public Training item;
-    private int adapterPosition;
     private final int OVERDUE = 0;
     private final int IS_GOING = 1;
     private final int WILL_GOING = 2;
@@ -34,9 +33,8 @@ public class TrainingNotification {
         this.context = context;
     }
 
-    public void sendNotification(Training item, int adapterPosition) throws ParseException {
+    public void sendNotification(Training item) throws ParseException {
         this.item=item;
-        this.adapterPosition=adapterPosition;
 
         Calendar calendar = Calendar.getInstance();
 
@@ -130,7 +128,6 @@ public class TrainingNotification {
     private Notification getNotification(String content, String time) {
 
         Intent startActivity = new Intent(context, ScheduleActivity.class);
-        startActivity.putExtra("adapterPosition",adapterPosition);
         startActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(context,0,startActivity,PendingIntent.FLAG_UPDATE_CURRENT);
 

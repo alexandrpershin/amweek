@@ -3,7 +3,7 @@
     package="com.endava.androidamweek">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -14,19 +14,38 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".ui.main.SplashScreen">
+        <activity
+            android:name=".ui.main.SplashScreen"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.main.ScheduleActivity" />
-        <activity android:name=".ui.speaker.SpeakerActivity" />
-        <activity android:name=".ui.quizz.QuizzActivity" />
-        <activity android:name=".ui.main.SignInActivity"/>
+        <activity
+            android:name=".ui.main.ScheduleActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.speaker.SpeakerActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.quizz.QuizzActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.SignInActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
 
-        <activity android:name=".ui.quizz.ContentQuizzActivity" />
+        <activity
+            android:name=".ui.quizz.ContentQuizzActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+
         <receiver
             android:name=".ui.training.NotificationPublisher"
             android:enabled="true" />
