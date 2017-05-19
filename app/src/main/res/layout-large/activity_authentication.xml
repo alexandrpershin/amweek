@@ -1,48 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="#af000000"
     android:padding="5dp">
 
-    <TextView
-        android:id="@+id/status"
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/octopus"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Status"
-        android:gravity="center"
-        android:textSize="@dimen/title_text_size_large"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/ic_octopus"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/name"
-        android:layout_width="match_parent"
+        android:id="@+id/appTitle"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/subheading_text_size_large"
-        android:text="Name" />
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="AM WEEK"
+        android:textColor="#a60000"
+        android:textSize="@dimen/splash_text"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/octopus" />
 
     <TextView
-        android:id="@+id/email"
-        android:layout_width="match_parent"
+        android:id="@+id/sign_in_comments"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/subheading_text_size_large"
-        android:text="Email"/>
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:text="@string/sign_in_comment"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appTitle" />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="visible" />
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/sign_out_button"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sign_in_comments" />
 
     <Button
         android:id="@+id/sign_out_button"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Sing out"
         android:textSize="@dimen/subheading_text_size_large"
-        android:text="Sing out" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

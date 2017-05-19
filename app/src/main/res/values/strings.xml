@@ -43,4 +43,6 @@
     <string name="quizz_answer_hint">Enter your answer here</string>
     <string name="btn_submit">Submit</string>
     <string name="str_winner">The winner is </string>
+    <string name="sign_in_comment">Sign in to bookmark trainings and answer quizzes</string>
+    <string name="sing_in">Sign In</string>
 </resources>

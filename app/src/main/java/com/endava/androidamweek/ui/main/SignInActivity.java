@@ -6,20 +6,18 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AlertDialog;
+import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.endava.androidamweek.R;
 import com.endava.androidamweek.data.localDB.LocalDatabase;
-import com.endava.androidamweek.data.mail.MailSenderClass;
 import com.endava.androidamweek.data.model.Database;
-import com.endava.androidamweek.data.model.Training;
 import com.endava.androidamweek.data.model.User;
 import com.endava.androidamweek.data.model.UserTraining;
-import com.endava.androidamweek.ui.training.TrainingsFragment;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -34,43 +32,30 @@ import com.google.firebase.database.DatabaseReference;
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
-public class SignInActivity extends BaseActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
+public class SignInActivity extends BaseActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     private static final int RC_SING_IN = 9001;
-
-    @BindView(R.id.sign_out_button)
-    Button signOutButton;
-
-    @BindView(R.id.status)
-    TextView statusView;
-
-    @BindView(R.id.name)
-    TextView name;
-
-    @BindView(R.id.email)
-    TextView email;
-
-    @BindView(R.id.sign_in_button)
-    SignInButton signInButton;
-
-    GoogleApiClient googleApiClient;
-    GoogleSignInResult result;
-    private final String ACCOUNT_PREFERENCES = "accountPreferences";
     private final static String USER_ID = "userID";
     private static String USER_EMAIL = "email";
     private static String USER_NAME = "userName";
+    private final String ACCOUNT_PREFERENCES = "accountPreferences";
+    @BindView(R.id.sign_in_button)
+    SignInButton signInButton;
+    @BindView(R.id.sign_out_button)
+    Button signOutButton;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.coordinator)
+    ConstraintLayout layout;
+    GoogleApiClient googleApiClient;
+    GoogleSignInResult result;
     SharedPreferences sharedPreferences;
-    private View view;
-    private AlertDialog dialog;
-
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -80,36 +65,19 @@ public class SignInActivity extends BaseActivity implements GoogleApiClient.OnCo
                 .enableAutoManage(this, this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, googleSignInOptions)
                 .build();
-
         sharedPreferences = getSharedPreferences(ACCOUNT_PREFERENCES, MODE_PRIVATE);
 
-        showDialog();
-    }
-
-    private void showDialog() {
-        view = getLayoutInflater().inflate(R.layout.activity_authentication, null);
-
-        ButterKnife.bind(this, view);
-
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(SignInActivity.this);
-
-        signInButton.setOnClickListener(this);
-        signOutButton.setOnClickListener(this);
-
-
-        String userName = sharedPreferences.getString(USER_NAME, "");
-        String userEmail = sharedPreferences.getString(USER_EMAIL, "");
-
-        if (!userName.equals("") && !userEmail.equals("")) {
-            name.setText("Hello , " + userName);
-            email.setText(userEmail);
-            statusView.setText("Signed in");
+        if (!sharedPreferences.getString(USER_ID, "").equals("")) {
+            signInButton.setVisibility(View.INVISIBLE);
+            signOutButton.setVisibility(View.VISIBLE);
+        } else {
+            signInButton.setVisibility(View.VISIBLE);
+            signOutButton.setVisibility(View.INVISIBLE);
         }
+        signInButton.setOnClickListener(new SignInClickListener());
+        signOutButton.setOnClickListener(new SignOutClickListener());
+        toolbar.setTitle(R.string.sing_in);
 
-        alertDialogBuilder.setView(view);
-        dialog = alertDialogBuilder.create();
-        dialog.setCancelable(false);
-        dialog.show();
     }
 
     @Override
@@ -117,18 +85,6 @@ public class SignInActivity extends BaseActivity implements GoogleApiClient.OnCo
         return R.layout.activity_authentication;
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.sign_in_button:
-                signIn();
-                break;
-            case R.id.sign_out_button:
-                signOut();
-                break;
-        }
-
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -143,14 +99,16 @@ public class SignInActivity extends BaseActivity implements GoogleApiClient.OnCo
     private void handleSignInResult(GoogleSignInResult result) {
         if (result.isSuccess()) {
             GoogleSignInAccount account = result.getSignInAccount();
-            statusView.setText("Signed in");
 
             sharedPreferences.edit().putString(USER_ID, account.getId()).apply();
             sharedPreferences.edit().putString(USER_NAME, account.getDisplayName()).apply();
             sharedPreferences.edit().putString(USER_EMAIL, account.getEmail()).apply();
 
             checkIfUserExist(account);
-        }
+
+            onBackPressed();
+        } else
+            Snackbar.make(layout, "An error has occured, please try again", Snackbar.LENGTH_LONG);
     }
 
     private void checkIfUserExist(GoogleSignInAccount account) {
@@ -161,8 +119,6 @@ public class SignInActivity extends BaseActivity implements GoogleApiClient.OnCo
         }
         if (!flag)
             createUser(account);
-
-        finish();
 
     }
 
@@ -186,15 +142,12 @@ public class SignInActivity extends BaseActivity implements GoogleApiClient.OnCo
         Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {
             @Override
             public void onResult(@NonNull Status status) {
-                statusView.setText("Signed out");
-                name.setText("Name");
-                email.setText("Email");
 
                 sharedPreferences.edit().putString(USER_ID, "").apply();
                 sharedPreferences.edit().putString(USER_NAME, "").apply();
                 sharedPreferences.edit().putString(USER_EMAIL, "").apply();
-
-                finish();
+                signInButton.setVisibility(View.VISIBLE);
+                signOutButton.setVisibility(View.INVISIBLE);
             }
         });
     }
@@ -207,5 +160,25 @@ public class SignInActivity extends BaseActivity implements GoogleApiClient.OnCo
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+    private class SignInClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+
+            signIn();
+
+
+        }
+    }
+
+    private class SignOutClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+
+            signOut();
+
+
+        }
     }
 }
