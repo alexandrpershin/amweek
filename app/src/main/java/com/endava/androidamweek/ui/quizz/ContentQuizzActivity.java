@@ -85,7 +85,9 @@ public class ContentQuizzActivity extends BaseActivity implements View.OnClickLi
         questionBox.setText(quizz.getConditions());
         codeView.setCode(quizz.getCodeSnippet(), "java");
 
-
+        if (!quizz.getStatus()){
+            answerBox.setEnabled(false);
+        }
 
         sharedPreferences = getSharedPreferences(ACCOUNT_PREFERENCES, MODE_PRIVATE);
         userId = sharedPreferences.getString(USER_ID, "");
@@ -99,6 +101,10 @@ public class ContentQuizzActivity extends BaseActivity implements View.OnClickLi
     public void onClick(View v) {
 
         userId = sharedPreferences.getString(USER_ID, "");
+
+        if (!quizz.getStatus()){
+            Toast.makeText(this, "This quizz is inactive", Toast.LENGTH_SHORT).show();
+        }
 
         if (getConnectivityStatus(getApplication()) == 0) {
             Toast.makeText(ContentQuizzActivity.this, "No internet  connection", Toast.LENGTH_SHORT).show();

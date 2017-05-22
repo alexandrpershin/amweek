@@ -43,7 +43,9 @@ public class UpdateDataService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         isFirsTimeRunning = true;
+
         childrenCount = LocalDatabase.getInstance().getQuizzes().size();
+
         executorService.execute(notify);
         Log.i("UpdateDataService", "onStartCommand");
         return Service.START_NOT_STICKY;

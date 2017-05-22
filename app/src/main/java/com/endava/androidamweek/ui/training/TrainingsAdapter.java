@@ -123,40 +123,40 @@ class TrainingsAdapter extends RecyclerView.Adapter<TrainingsAdapter.ViewHolder>
                     foldingCell.toggle(false);
                 }
             });
-            starImage.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    Training item = trainingListForCurrentDay.get(getAdapterPosition());
-
-                    if (userID.equals("")) {
-                        context.startActivity(new Intent(context, SignInActivity.class));
-                        return;
-                    }
-
-                    if (!userID.equals("")) {
-                        flag = utils.userHasCurrentTraining(userID, item);
-                        flag = !flag;
-
-                        if (flag) {
-                            try {
-                                notification.sendNotification(item, getAdapterPosition());
-                            } catch (ParseException e) {
-                                e.printStackTrace();
-                            }
-
-                            utils.addTrainingToUser(userID, item);
-                            starImage.setImageResource(R.drawable.ic_fill_star);
-                        } else {
-                            notification.cancel(item.getId());
-                            utils.removeTrainingToUser(userID, item);
-                            starImage.setImageResource(R.drawable.ic_star);
-                        }
-                    }
-
-
-                }
-            });
+//            starImage.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//
+//                    Training item = trainingListForCurrentDay.get(getAdapterPosition());
+//
+//                    if (userID.equals("")) {
+//                        context.startActivity(new Intent(context, SignInActivity.class));
+//                        return;
+//                    }
+//
+//                    if (!userID.equals("")) {
+//                        flag = utils.userHasCurrentTraining(userID, item);
+//                        flag = !flag;
+//
+//                        if (flag) {
+//                            try {
+//                                notification.sendNotification(item);
+//                            } catch (ParseException e) {
+//                                e.printStackTrace();
+//                            }
+//
+//                            utils.addTrainingToUser(userID, item);
+//                            starImage.setImageResource(R.drawable.ic_fill_star);
+//                        } else {
+//                            notification.cancel(item.getId());
+//                            utils.removeTrainingToUser(userID, item);
+//                            starImage.setImageResource(R.drawable.ic_star);
+//                        }
+//                    }
+//
+//
+//                }
+//            });
         }
     }
 
@@ -200,6 +200,39 @@ class TrainingsAdapter extends RecyclerView.Adapter<TrainingsAdapter.ViewHolder>
         holder.foldShortDescription.setText(item.getStream());
         holder.foldTrainingTime.setText(item.getTimeStart()+"-"+item.getTimeEnd());
         holder.foldTrainingSpeaker.setText(utils.getSpeakerName(item.getSpeakerId()));
+        holder.starImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if (userID.equals("")) {
+                    context.startActivity(new Intent(context, SignInActivity.class));
+                    return;
+                }
+
+                if (!userID.equals("")) {
+                    flag = utils.userHasCurrentTraining(userID, item);
+                    flag = !flag;
+
+                    if (flag) {
+                        try {
+                            notification.sendNotification(item);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+                        utils.addTrainingToUser(userID, item);
+                        holder.starImage.setImageResource(R.drawable.ic_fill_star);
+                    } else {
+                        notification.cancel(item.getId());
+                        utils.removeTrainingToUser(userID, item);
+                        holder.starImage.setImageResource(R.drawable.ic_star);
+                    }
+                }
+
+
+            }
+        });
 
 
         if (!userID.equals("")) {
