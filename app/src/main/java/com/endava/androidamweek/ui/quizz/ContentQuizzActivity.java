@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.endava.androidamweek.R;
+import com.endava.androidamweek.data.localDB.LocalDatabase;
 import com.endava.androidamweek.data.mail.MailSenderClass;
 import com.endava.androidamweek.data.model.Answer;
 import com.endava.androidamweek.data.model.Database;
@@ -104,6 +105,7 @@ public class ContentQuizzActivity extends BaseActivity implements View.OnClickLi
 
         if (!quizz.getStatus()){
             Toast.makeText(this, "This quizz is inactive", Toast.LENGTH_SHORT).show();
+            return;
         }
 
         if (getConnectivityStatus(getApplication()) == 0) {
@@ -154,7 +156,7 @@ public class ContentQuizzActivity extends BaseActivity implements View.OnClickLi
                 try {
                     new MailSenderClass("endava.amweek@gmail.com", "endavaamweek")
                             .sendMail("Quizz answer", body.toString(), "name",
-                                    "Alexandr-pershin@mail.ru", "");
+                                    "Vladislav.Guleaev@endava.com", "");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

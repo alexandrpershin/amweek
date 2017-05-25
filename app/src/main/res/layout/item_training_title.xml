@@ -40,6 +40,7 @@
             android:layout_marginTop="@dimen/min_spacing"
             android:ellipsize="end"
             android:gravity="center_vertical"
+            android:text="Dfdfggfgf"
             android:maxLines="2"
             android:textColor="@color/color_grey_dark"
             android:textSize="@dimen/body_text_size" />
@@ -47,11 +48,14 @@
         <TextView
             android:id="@+id/foldTrainingTitle"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/min_spacing"
+            android:layout_marginBottom="@dimen/min_spacing"
             android:layout_below="@+id/stream"
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:maxLines="3"
+            android:text="Dgdfgfgfhddd ddfdf dggdfgdg d gdgd g dg dg gdgd gd gdgdgd gdgdgdgdgdgdgdgd"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/subheading_text_size"
             android:textStyle="bold" />
@@ -60,7 +64,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/foldTrainingTitle"
-            android:gravity="center"
+            android:gravity="start"
+            android:id="@+id/time_layout"
             android:orientation="horizontal">
 
             <ImageView
@@ -75,14 +80,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/min_spacing"
+                android:text="Dffgfg"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/body_text_size" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/time_layout"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/foldSpeakerIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/max_spacing"
-                android:layout_marginStart="@dimen/medium_spacing"
                 android:adjustViewBounds="true"
                 android:src="@drawable/ic_microphone" />
 
@@ -93,6 +106,8 @@
                 android:layout_marginStart="@dimen/min_spacing"
                 android:ellipsize="end"
                 android:maxLines="1"
+                android:text="Dgfgfhfhfh"
+                android:layout_marginBottom="@dimen/min_spacing"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/body_text_size" />
 
@@ -112,11 +127,11 @@
             android:id="@+id/star"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:clickable="true"
             android:layout_centerVertical="true"
             android:adjustViewBounds="true"
-            android:tag="ic_star"
-            android:src="@drawable/ic_star" />
+            android:clickable="true"
+            android:src="@drawable/ic_star"
+            android:tag="ic_star" />
 
     </RelativeLayout>
 

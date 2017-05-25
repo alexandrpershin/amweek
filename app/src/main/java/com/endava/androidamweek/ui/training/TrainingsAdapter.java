@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.endava.androidamweek.R;
 import com.endava.androidamweek.data.localDB.LocalDatabase;
@@ -41,7 +42,6 @@ class TrainingsAdapter extends RecyclerView.Adapter<TrainingsAdapter.ViewHolder>
     private Context context;
     private String userID;
     private TrainingNotification notification;
-    private int adapterPosition;
 
 
     void updateList(int dayOfWeek) {
@@ -123,45 +123,11 @@ class TrainingsAdapter extends RecyclerView.Adapter<TrainingsAdapter.ViewHolder>
                     foldingCell.toggle(false);
                 }
             });
-//            starImage.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//
-//                    Training item = trainingListForCurrentDay.get(getAdapterPosition());
-//
-//                    if (userID.equals("")) {
-//                        context.startActivity(new Intent(context, SignInActivity.class));
-//                        return;
-//                    }
-//
-//                    if (!userID.equals("")) {
-//                        flag = utils.userHasCurrentTraining(userID, item);
-//                        flag = !flag;
-//
-//                        if (flag) {
-//                            try {
-//                                notification.sendNotification(item);
-//                            } catch (ParseException e) {
-//                                e.printStackTrace();
-//                            }
-//
-//                            utils.addTrainingToUser(userID, item);
-//                            starImage.setImageResource(R.drawable.ic_fill_star);
-//                        } else {
-//                            notification.cancel(item.getId());
-//                            utils.removeTrainingToUser(userID, item);
-//                            starImage.setImageResource(R.drawable.ic_star);
-//                        }
-//                    }
-//
-//
-//                }
-//            });
+
         }
     }
 
-    TrainingsAdapter(Context context, int adapterPosition) {
-        this.adapterPosition = adapterPosition;
+    TrainingsAdapter(Context context ) {
         this.context = context;
         LocalDatabase.getInstance().readFromDB();
         trainingListForCurrentDay = new ArrayList<>();
@@ -223,10 +189,12 @@ class TrainingsAdapter extends RecyclerView.Adapter<TrainingsAdapter.ViewHolder>
 
                         utils.addTrainingToUser(userID, item);
                         holder.starImage.setImageResource(R.drawable.ic_fill_star);
+                        Toast.makeText(v.getContext(), "You've setup a remainder", Toast.LENGTH_SHORT).show();
                     } else {
                         notification.cancel(item.getId());
                         utils.removeTrainingToUser(userID, item);
                         holder.starImage.setImageResource(R.drawable.ic_star);
+                        Toast.makeText(v.getContext(), "You've deleted the remainder", Toast.LENGTH_SHORT).show();
                     }
                 }
 

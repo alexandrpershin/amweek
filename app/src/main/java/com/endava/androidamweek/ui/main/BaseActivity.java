@@ -12,11 +12,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import com.crashlytics.android.Crashlytics;
 import com.endava.androidamweek.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.fabric.sdk.android.Fabric;
 
 public abstract class BaseActivity extends AppCompatActivity {
     private Unbinder unbinder;
@@ -29,6 +31,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         bindView();
+
+        Fabric.with(this, new Crashlytics());
+
     }
 
     protected abstract int getLayoutId();

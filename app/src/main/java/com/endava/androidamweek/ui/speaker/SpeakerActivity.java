@@ -66,7 +66,6 @@ public class SpeakerActivity extends BaseActivity {
         speakerTrainings.setAdapter(adapter);
 
         speakerName.setText(speaker.getName());
-//        speakerShortInfo.setText(speaker.getShortInfo());
         speakerDescription.setText(speaker.getLongInfo());
 
         Picasso.with(getBaseContext())

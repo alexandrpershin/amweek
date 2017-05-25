@@ -8,9 +8,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.endava.androidamweek.R;
+import com.endava.androidamweek.data.localDB.LocalDatabase;
 import com.endava.androidamweek.ui.quizz.QuizzActivity;
 import com.endava.androidamweek.ui.training.TrainingsFragment;
 import com.endava.androidamweek.ui.training.UpdateDataService;
@@ -36,13 +36,10 @@ public class ScheduleActivity extends BaseActivity implements OnTabSelectListene
     CoordinatorLayout view;
 
     private Intent intent;
-    private int adapterPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        adapterPosition = getIntent().getIntExtra("adapterPosition", 0);
 
         intent = new Intent(getApplicationContext(), UpdateDataService.class);
         startService(intent);
@@ -59,9 +56,9 @@ public class ScheduleActivity extends BaseActivity implements OnTabSelectListene
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ScheduleActivity.this, QuizzActivity.class));
-//                startActivity(new Intent(ScheduleActivity.this, SignInActivity.class));
             }
         });
+
         setCurrentDay();
 
         Log.i("ScheduleActivity", "created");
@@ -97,19 +94,19 @@ public class ScheduleActivity extends BaseActivity implements OnTabSelectListene
     public void onTabSelected(@IdRes int tabId) {
         switch (tabId) {
             case R.id.monday:
-                ScreenManager.getInstance().replaceFragment(new TrainingsFragment(), 1,adapterPosition);
+                ScreenManager.getInstance().replaceFragment(new TrainingsFragment(), 1);
                 break;
             case R.id.tuesday:
-                ScreenManager.getInstance().replaceFragment(new TrainingsFragment(), 2,adapterPosition);
+                ScreenManager.getInstance().replaceFragment(new TrainingsFragment(), 2);
                 break;
             case R.id.wednesday:
-                ScreenManager.getInstance().replaceFragment(new TrainingsFragment(), 3,adapterPosition);
+                ScreenManager.getInstance().replaceFragment(new TrainingsFragment(), 3);
                 break;
             case R.id.thursday:
-                ScreenManager.getInstance().replaceFragment(new TrainingsFragment(), 4,adapterPosition);
+                ScreenManager.getInstance().replaceFragment(new TrainingsFragment(), 4);
                 break;
             case R.id.friday:
-                ScreenManager.getInstance().replaceFragment(new TrainingsFragment(), 5,adapterPosition);
+                ScreenManager.getInstance().replaceFragment(new TrainingsFragment(), 5);
                 break;
             default:
                 break;

@@ -44,6 +44,9 @@ class QuizzAdapter extends RecyclerView.Adapter<QuizzAdapter.ViewHolder> {
         @BindView(R.id.winner)
         TextView quizzWinner;
 
+        @BindView(R.id.winnerText)
+        TextView winnerText;
+
         @BindView(R.id.quizzStatus)
         ImageView quizzStatus;
 
@@ -75,8 +78,14 @@ class QuizzAdapter extends RecyclerView.Adapter<QuizzAdapter.ViewHolder> {
 
         final Quizz item = quizzList.get(position);
 
+        if(item.getWinner().equals("")) {
+            holder.winnerText.setVisibility(View.INVISIBLE);
+        }
+        else
+            holder.winnerText.setVisibility(View.VISIBLE);
+
         holder.quizzTitle.setText(item.getTitle());
-        holder.quizzWinner.setText(item.getWinner());
+        holder.quizzWinner.setText(" "+item.getWinner());
         holder.quizzTime.setText(item.getTime());
         holder.quizzDate.setText(item.getDate());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -85,6 +94,8 @@ class QuizzAdapter extends RecyclerView.Adapter<QuizzAdapter.ViewHolder> {
                 quizzCallback.OnClick(item);
             }
         });
+
+
 
             isActive = item.getStatus();
 

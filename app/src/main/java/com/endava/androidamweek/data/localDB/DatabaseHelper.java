@@ -22,7 +22,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
 
     private static final String DATABASE_NAME = "AMWeekDB.db";
-    private static final int DATABASE_VERSION = 42;
+    private static final int DATABASE_VERSION = 44;
 
     private Dao<User, Integer> userDao;
     private Dao<UserTraining, Integer> userTrainingDao;

@@ -1,5 +1,11 @@
 apply plugin: 'com.android.application'
 
+apply plugin: 'io.fabric'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
@@ -7,8 +13,8 @@ android {
         applicationId "com.endava.androidamweek"
         minSdkVersion 17
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "2.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -57,5 +63,10 @@ dependencies {
     compile files('libs/lib_mail.jar')
     compile files('libs/activation.jar')
     compile files('libs/additionnal.jar')
+
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
+        transitive = true;
+    }
+
 }
 apply plugin: 'com.google.gms.google-services'

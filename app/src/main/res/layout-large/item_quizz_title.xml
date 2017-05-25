@@ -11,6 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="110dp"
+        android:layout_marginLeft="20dp"
         android:background="@color/color_accent"
         android:baselineAligned="false"
         android:orientation="horizontal">
@@ -109,7 +110,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="3"
+            android:layout_weight="5"
             android:gravity="center"
             android:padding="@dimen/min_spacing">
 

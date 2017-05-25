@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AndroidAMWeek</string>
+    <string name="app_name">AMWeek</string>
     <string name="description">DESCRIPTION</string>
     <string name="speaker">Speaker</string>
     <string name="about_speaker">ABOUT SPEAKER</string>
@@ -42,7 +42,7 @@
         }</string>
     <string name="quizz_answer_hint">Enter your answer here</string>
     <string name="btn_submit">Submit</string>
-    <string name="str_winner">The winner is </string>
+    <string name="str_winner">Winner: </string>
     <string name="sign_in_comment">Sign in to bookmark trainings and answer quizzes</string>
     <string name="sing_in">Sign In</string>
 </resources>

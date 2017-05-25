@@ -57,18 +57,18 @@ public class TrainingNotification {
 
         switch (trainingState) {
             case OVERDUE:
-                scheduleNotification(item.getId(), getNotification(item.getTitle(), "has passed"), 1000);
+                scheduleNotification(item.getId(), getNotification(item.getTitle(), "...already passed"), 1000);
                 break;
             case IS_GOING:
-                scheduleNotification(item.getId(), getNotification(item.getTitle(), "Currently active, started at:" + item.getTimeStart()), 1000);
+                scheduleNotification(item.getId(), getNotification(item.getTitle(), "...currently active, started at:" + item.getTimeStart()), 1000);
                 break;
             case WILL_GOING:
 
                 long minutes = calculateMinutesUntilTraining(currentDay, trainingDayStartTime);
                 if (minutes <= 15) {
-                    scheduleNotification(item.getId(), getNotification(item.getTitle(), "Trainig will start after " + minutes + " minutes"), 1000);
+                    scheduleNotification(item.getId(), getNotification(item.getTitle(), "Trainig will start in " + minutes + " minutes"), 1000);
                 } else {
-                    scheduleNotification(item.getId(), getNotification(item.getTitle(), "Trainig will start after 15 minutes"), (minutes - 15) * 60000);
+                    scheduleNotification(item.getId(), getNotification(item.getTitle(), "Trainig will start in 15 minutes"), (minutes - 15) * 60000);
                 }
 
                 break;

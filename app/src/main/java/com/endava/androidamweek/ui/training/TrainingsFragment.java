@@ -5,6 +5,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
@@ -14,6 +16,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.endava.androidamweek.R;
 import com.endava.androidamweek.data.localDB.LocalDatabase;
@@ -38,11 +41,7 @@ public class TrainingsFragment extends Fragment implements SpeakerClickListener 
 
     TrainingsAdapter adapter;
     private final static String DAY_OF_WEEK = "dayOfWeek";
-    private static final String ADAPTER_POSITION = "adapterPosition";
-    private List<Speaker> speakers;
-    private List<Training> trainings;
     private int dayOfWeek;
-    private int adapterPosition;
     private Bundle bundle;
 
     @Nullable
@@ -52,11 +51,10 @@ public class TrainingsFragment extends Fragment implements SpeakerClickListener 
 
         ButterKnife.bind(this, view);
 
-        LocalDatabase.getInstance().setContext(getContext());
+        LocalDatabase.getInstance().setContext(getActivity());
 
         bundle = getArguments();
         dayOfWeek = bundle.getInt(DAY_OF_WEEK);
-        adapterPosition = bundle.getInt(ADAPTER_POSITION);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -77,7 +75,7 @@ public class TrainingsFragment extends Fragment implements SpeakerClickListener 
     @Override
     public void onPause() {
         super.onPause();
-        LocalBroadcastManager.getInstance(getContext()).unregisterReceiver(mMessageReceiver);
+        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(mMessageReceiver);
     }
 
     private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
@@ -92,7 +90,7 @@ public class TrainingsFragment extends Fragment implements SpeakerClickListener 
     public void onResume() {
         super.onResume();
 
-        adapter = new TrainingsAdapter(getActivity(), adapterPosition);
+        adapter = new TrainingsAdapter(getActivity());
 
         adapter.setOnSpeakerClickListener(this);
 
@@ -101,13 +99,33 @@ public class TrainingsFragment extends Fragment implements SpeakerClickListener 
 
         recyclerView.setAdapter(adapter);
 
-        LocalBroadcastManager.getInstance(getContext()).registerReceiver(mMessageReceiver, new IntentFilter("UpdateData"));
+        if (getConnectivityStatus(getActivity()) == 0 && LocalDatabase.getInstance().getTrainings().size() == 0) {
+            Toast.makeText(getActivity(), "No internet connection", Toast.LENGTH_SHORT).show();
+        }
+
+        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(mMessageReceiver, new IntentFilter("UpdateData"));
     }
 
     public boolean isDatabaseNull() {
         return (LocalDatabase.getInstance().getSpeakers() == null || LocalDatabase.getInstance().getTrainings() == null
                 || LocalDatabase.getInstance().getUsers() == null || LocalDatabase.getInstance().getQuizzes() == null);
     }
+
+    public static int getConnectivityStatus(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        if (null != activeNetwork) {
+            if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI)
+                return 1;
+
+            if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE)
+                return 2;
+        }
+        return 0;
+    }
+
 
 
 }

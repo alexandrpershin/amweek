@@ -9,7 +9,9 @@ import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -32,10 +34,12 @@ import com.google.firebase.database.DatabaseReference;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 public class SignInActivity extends BaseActivity implements GoogleApiClient.OnConnectionFailedListener {
 
-    private static final int RC_SING_IN = 9001;
+    private  final int RC_SING_IN = 9001;
     private final static String USER_ID = "userID";
     private static String USER_EMAIL = "email";
     private static String USER_NAME = "userName";
@@ -52,10 +56,10 @@ public class SignInActivity extends BaseActivity implements GoogleApiClient.OnCo
     GoogleSignInResult result;
     SharedPreferences sharedPreferences;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -89,17 +93,18 @@ public class SignInActivity extends BaseActivity implements GoogleApiClient.OnCo
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == RC_SING_IN) {
             result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            Log.i("Signin","succes");
+
             handleSignInResult(result);
+
         }
     }
 
     private void handleSignInResult(GoogleSignInResult result) {
         if (result.isSuccess()) {
             GoogleSignInAccount account = result.getSignInAccount();
-
             sharedPreferences.edit().putString(USER_ID, account.getId()).apply();
             sharedPreferences.edit().putString(USER_NAME, account.getDisplayName()).apply();
             sharedPreferences.edit().putString(USER_EMAIL, account.getEmail()).apply();
@@ -107,8 +112,10 @@ public class SignInActivity extends BaseActivity implements GoogleApiClient.OnCo
             checkIfUserExist(account);
 
             onBackPressed();
-        } else
+        } else {
             Snackbar.make(layout, "An error has occured, please try again", Snackbar.LENGTH_LONG);
+            Log.i("SignInActivity","result is unseccess");
+        }
     }
 
     private void checkIfUserExist(GoogleSignInAccount account) {
@@ -155,6 +162,7 @@ public class SignInActivity extends BaseActivity implements GoogleApiClient.OnCo
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
         startActivityForResult(signInIntent, RC_SING_IN);
+
     }
 
     @Override
@@ -165,7 +173,7 @@ public class SignInActivity extends BaseActivity implements GoogleApiClient.OnCo
     private class SignInClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-
+            Log.i("Signin","clickedButton");
             signIn();
 
 
