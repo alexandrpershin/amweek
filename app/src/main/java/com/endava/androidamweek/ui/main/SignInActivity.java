@@ -113,7 +113,7 @@ public class SignInActivity extends BaseActivity implements GoogleApiClient.OnCo
             onBackPressed();
         } else {
             Snackbar.make(layout, "An error has occured, please try again", Snackbar.LENGTH_LONG);
-            Log.i("SignInActivity","result is unseccess");
+            Log.i("Signin","result is unsuccess");
         }
     }
 
